@@ -13,6 +13,7 @@ import time
 import cases
 import unittest
 from lib.unittest_.runner import HTMLTestRunner
+from linux import test_UT
 
 run_path = os.path.split(os.path.realpath(__file__))[0]
 
@@ -32,7 +33,10 @@ if __name__ == '__main__':
     testsuite.addTest((cases.CoursesTestCase("test_courses_price_filter")))
     # 验证课程库列表筛选课程难度
     testsuite.addTest(cases.CoursesTestCase("test_course_difficulty_level"))
-
+    testsuite.addTest(unittest.makeSuite(test_UT.UT))
+    testsuite.addTest(unittest.makeSuite(test_UT.UT1))
+    testsuite.addTest(unittest.makeSuite(test_UT.UT2))
+    testsuite.addTest(unittest.makeSuite(test_UT.UT3))
     # # 验证免费课程购买
     # testsuite.addTest(cases.CourseTestCase('test_free_course_buy'))
     # # 验证收费课程购买
