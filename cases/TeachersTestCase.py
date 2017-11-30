@@ -29,9 +29,9 @@ class TeachersTestCase(TestCase):
 
         :return:
         """
-        self.teachers.act_click_teachers_category()
-        category_name = self.teachers.get_current_teachers_category()
-        print(self.driver.title)
+        click_category_name = self.teachers.get_random_teachers_category()
 
-        self.assertIn(category_name, self.driver.current_url, "测试不通过")
+        category_name = self.teachers.get_current_teachers_category().text
+
+        self.assertEqual(click_category_name, category_name, "测试不通过")
 
