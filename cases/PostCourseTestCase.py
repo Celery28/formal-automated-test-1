@@ -1,5 +1,6 @@
 from lib import models
 from lib.unittest_ import TestCase
+from lib.common import decorators
 
 
 class PostCourseTestCase(TestCase):
@@ -13,7 +14,6 @@ class PostCourseTestCase(TestCase):
         TestCase.run_as = 'Chrome'
         TestCase.setUpClass()
         cls.post_courses = models.PostCourses(cls.driver)
-
 
     @decorators.TestCaseDecorators.screen_shot_in_except("点击进入下一课失败")
     def test_next_course(self):

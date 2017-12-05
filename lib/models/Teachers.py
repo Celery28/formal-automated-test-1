@@ -41,4 +41,19 @@ class Teachers(Page):
 
         return category_name[0]
 
+    def get_current_list_teacher(self):
+        """
+        随机获取当前页面教师列表中的教师
+
+        :return:
+        """
+
+        teachers = self.driver.find_elements_by_css_selector("ul.teacher-list")
+        if len(teachers) == 0:
+            raise exceptions.NoSuchElementException("该方向下没有教师，请重新选择")
+
+        teacher = teachers[random.randint(0, len(teachers) - 1)]
+
+        teacher_name = teacher.find_element_by_css_selector("span.f18")
+        teacher_classroom = teacher.find_element_by_css_selector("a.goto-look")
 
