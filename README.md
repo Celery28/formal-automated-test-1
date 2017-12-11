@@ -9,7 +9,7 @@
 ```ps -aux | grep -i xvfb```
 
 ## 2.如果没有已经启动的Xvfb进程，通过下面的命令启动
-```Xvfb -ac -br -nolisten tcp -screen 0 2880x1720x24 :1121```
+```Xvfb -ac -br -nolisten tcp -screen 0 2880x1720x24 :1121 > /dev/null 2>&1 &```
 
 *Tip:1121可以更换为其他数字*
 
