@@ -25,7 +25,10 @@ class Page:
         if url is not None or self.url is not None:
             self.driver.get(url if url is not None else self.url)
 
-        self.driver.maximize_window()
+        try:
+            self.driver.maximize_window()
+        except exceptions.WebDriverException:
+            pass
         self.current_handle = self.driver.current_window_handle
         handlers = self.driver.window_handles
         self.driver.switch_to.window(handlers[-1])
