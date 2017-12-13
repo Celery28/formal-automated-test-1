@@ -75,7 +75,9 @@ if __name__ == '__main__':
     教师列表页测试用例
     """
     # 验证随机筛选教师方向
-    testsuite.addTest(cases.TeachersTestCase("test_teachers_category"))
+    # testsuite.addTest(cases.TeachersTestCase("test_teachers_category"))
+    #
+    #
 
     # runner = unittest.TextTestRunner()
     # runner.run(testsuite)
