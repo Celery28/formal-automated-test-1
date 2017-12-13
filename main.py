@@ -48,26 +48,26 @@ if __name__ == '__main__':
     """
     课程详情页测试用例
     """
-    # # 验证免费课程购买
-    # testsuite.addTest(cases.CourseTestCase('test_free_course_buy'))
-    # # 验证收费课程购买
-    # testsuite.addTest(cases.CourseTestCase('test_no_free_course_buy'))
-    # # 验证课程关注
-    # testsuite.addTest(cases.CourseTestCase('test_course_favorite'))
-    # # 验证课程标签
-    # testsuite.addTest(cases.CourseTestCase('test_course_tag'))
-    # # 验证教师关注
-    # testsuite.addTest(cases.CourseTestCase('test_teacher_favorite'))
-    # # 验证教师点赞
-    # testsuite.addTest(cases.CourseTestCase('test_teacher_vote'))
-    # # 验证打开教师详情页
-    # testsuite.addTest(cases.CourseTestCase('test_open_teacher'))
+    # 验证免费课程购买
+    testsuite.addTest(cases.CourseTestCase('test_free_course_buy'))
+    # 验证收费课程购买
+    testsuite.addTest(cases.CourseTestCase('test_no_free_course_buy'))
+    # 验证课程关注
+    testsuite.addTest(cases.CourseTestCase('test_course_favorite'))
+    # 验证课程标签
+    testsuite.addTest(cases.CourseTestCase('test_course_tag'))
+    # 验证教师关注
+    testsuite.addTest(cases.CourseTestCase('test_teacher_favorite'))
+    # 验证教师点赞
+    testsuite.addTest(cases.CourseTestCase('test_teacher_vote'))
+    # 验证打开教师详情页
+    testsuite.addTest(cases.CourseTestCase('test_open_teacher'))
 
     """
     岗位列表页测试用例
     """
     # 证进入岗位课详情页
-    # testsuite.addTest(cases.PostCoursesTestCase("test_post_course"))
+    testsuite.addTest(cases.PostCoursesTestCase("test_post_course"))
     # 验证进入下一课
     # testsuite.addTest(cases.PostCoursesTestCase("test_next_course"))
 
@@ -75,9 +75,7 @@ if __name__ == '__main__':
     教师列表页测试用例
     """
     # 验证随机筛选教师方向
-    # testsuite.addTest(cases.TeachersTestCase("test_teachers_category"))
-    #
-    #
+    testsuite.addTest(cases.TeachersTestCase("test_teachers_category"))
 
     # runner = unittest.TextTestRunner()
     # runner.run(testsuite)
