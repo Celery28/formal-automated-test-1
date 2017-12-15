@@ -24,6 +24,12 @@ if __name__ == '__main__':
     """
     课工场网站首页测试用例
     """
+    # 验证进入课程库界面
+    testsuite.addTest(cases.HomepageTestcase("test_act_courses"))
+    # 验证进入就业实训界面
+    testsuite.addTest(cases.HomepageTestcase("test_act_employment_base"))
+    # 验证进入岗位课界面
+    testsuite.addTest(cases.HomepageTestcase("test_act_job"))
     # 验证进入金牌讲师界面
     testsuite.addTest(cases.HomepageTestcase("test_act_teachers"))
 
@@ -83,16 +89,16 @@ if __name__ == '__main__':
     # # 验证随机筛选教师方向
     # testsuite.addTest(cases.TeachersTestCase("test_teachers_category"))
 
-    # runner = unittest.TextTestRunner()
-    # runner.run(testsuite)
-
-    report_path = os.path.join(run_path, 'report')
-    now = time.strftime('%Y-%m-%d %H-%M-%S')
-
-    filename = os.path.join(report_path, now + 'report.html')
-    fp = open(filename, 'wb')
-
-    runner = HTMLTestRunner(stream=fp,
-                            title='课程库测试结果',
-                            description='测试报告.')
+    runner = unittest.TextTestRunner()
     runner.run(testsuite)
+
+    # report_path = os.path.join(run_path, 'report')
+    # now = time.strftime('%Y-%m-%d %H-%M-%S')
+    #
+    # filename = os.path.join(report_path, now + 'report.html')
+    # fp = open(filename, 'wb')
+    #
+    # runner = HTMLTestRunner(stream=fp,
+    #                         title='课程库测试结果',
+    #                         description='测试报告.')
+    # runner.run(testsuite)
