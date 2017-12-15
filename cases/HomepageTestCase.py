@@ -1,5 +1,6 @@
 from lib.unittest_ import TestCase
 from lib import models
+from selenium import webdriver
 from lib.common import decorators
 
 class HomepageTestcase(TestCase):
@@ -19,6 +20,7 @@ class HomepageTestcase(TestCase):
         :return:
         """
         self.close_browser_current_tab_on_tear_down = False
+        # self.driver.close()
 
     @decorators.TestCaseDecorators.screen_shot_in_except("进入课程库失败")
     def test_act_courses(self):

@@ -38,6 +38,8 @@ class Homepage(Page):
     def act_teachers(self):
         """
         进入金牌讲师界面
+        :return:
         """
+
         more_button = self.driver.find_element_by_css_selector("div.good-teacher span.title-r a")
         more_button.click()
