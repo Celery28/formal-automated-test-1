@@ -1,9 +1,9 @@
-from lib import models
+from lib.models import Page
 
 from selenium.common import exceptions
 
 
-class PostCourse(models.Page):
+class PostCourse(Page):
     """
     岗位课详情页.
     """

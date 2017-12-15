@@ -13,7 +13,7 @@ import time
 import cases
 import unittest
 from lib.unittest_.runner import HTMLTestRunner
-#from linux import test_UT
+# from linux import test_UT
 
 run_path = os.path.split(os.path.realpath(__file__))[0]
 
@@ -83,16 +83,16 @@ if __name__ == '__main__':
     # # 验证随机筛选教师方向
     # testsuite.addTest(cases.TeachersTestCase("test_teachers_category"))
 
-    runner = unittest.TextTestRunner()
-    runner.run(testsuite)
-
-    # report_path = os.path.join(run_path, 'report')
-    # now = time.strftime('%Y-%m-%d %H-%M-%S')
-    #
-    # filename = os.path.join(report_path, now + 'report.html')
-    # fp = open(filename, 'wb')
-    #
-    # runner = HTMLTestRunner(stream=fp,
-    #                         title='课程库测试结果',
-    #                         description='测试报告.')
+    # runner = unittest.TextTestRunner()
     # runner.run(testsuite)
+
+    report_path = os.path.join(run_path, 'report')
+    now = time.strftime('%Y-%m-%d %H-%M-%S')
+
+    filename = os.path.join(report_path, now + 'report.html')
+    fp = open(filename, 'wb')
+
+    runner = HTMLTestRunner(stream=fp,
+                            title='课程库测试结果',
+                            description='测试报告.')
+    runner.run(testsuite)
