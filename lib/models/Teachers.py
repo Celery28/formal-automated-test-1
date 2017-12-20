@@ -38,6 +38,7 @@ class Teachers(Page):
             raise exceptions.NoSuchElementException("没有找到选中的教师方向")
 
         return category_name[0]
+    sdlfalskd
 
     def get_current_list_teacher(self):
         """
