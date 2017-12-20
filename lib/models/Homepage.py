@@ -1,7 +1,6 @@
 from lib.models import Page
 
 
-
 class Homepage(Page):
     """
     课工场网站首页模型

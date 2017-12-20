@@ -3,4 +3,4 @@ from .CourseTestCase import CourseTestCase
 from .PostCoursesTestCase import PostCoursesTestCase
 from .TeachersTestCase import TeachersTestCase
 from .TeacherTestCase import TeacherTestCase
-from .HomepageTestCase import HomepageTestcase
+from .HomepageTestCase import HomepageTestCase

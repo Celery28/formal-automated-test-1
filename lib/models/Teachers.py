@@ -24,10 +24,8 @@ class Teachers(Page):
             raise exceptions.NoSuchElementException("没有找到课程方向")
 
         teacher_category = teachers_category[random.randint(1, len(teachers_category) - 1)]
-        click_category_name = teacher_category.text
-        teacher_category.click()
 
-        return click_category_name
+        return teacher_category
 
     def get_current_teachers_category(self):
         """
@@ -48,12 +46,24 @@ class Teachers(Page):
         :return:
         """
 
-        teachers = self.driver.find_elements_by_css_selector("ul.teacher-list")
+        teachers = self.driver.find_elements_by_css_selector("ul.teacher-list li")
         if len(teachers) == 0:
-            raise exceptions.NoSuchElementException("该方向下没有教师，请重新选择")
-
+            return None
         teacher = teachers[random.randint(0, len(teachers) - 1)]
 
-        teacher_name = teacher.find_element_by_css_selector("span.f18")
+        return teacher
+
+    def get_teacher_info(self, teacher):
+
+        teacher_name = teacher.find_element_by_css_selector("span.f18").text
         teacher_classroom = teacher.find_element_by_css_selector("a.goto-look")
 
+        return teacher_name, teacher_classroom
+
+    def act_random_teachers_category(self):
+        """
+        随机进入一个教师方向
+        
+        :return: 
+        """
+        self.get_random_teachers_category().click()
