@@ -21,7 +21,6 @@ class TeachersTestCase(TestCase):
     @decorators.TestCaseDecorators.screen_shot_in_except("随机选择教师方向失败")
     def test_teachers_category(self):
         """随机筛选教师方向"""
-
         teacher_category = self.teachers.get_random_teachers_category()
         click_category_name = teacher_category.text
         teacher_category.click()
