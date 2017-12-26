@@ -11,7 +11,7 @@ class Teachers(Page):
     教师列表页模型
     """
 
-    url = 'http://www.kgc.cn/teachers'
+    url = 'http://www.kgc.dev.cn/teachers'
 
     def get_random_teachers_category(self):
         """

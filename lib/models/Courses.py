@@ -11,7 +11,7 @@ class Courses(Page):
     课程库列表页模型
     """
 
-    url = 'http://www.kgc.cn/list'
+    url = 'http://www.kgc.dev.cn/list'
 
     title_link_css_selector = 'a.course-title-a'
 

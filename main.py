@@ -90,17 +90,17 @@ if __name__ == '__main__':
     testsuite.addTest(cases.TeachersTestCase("test_teachers_category"))
     # 随机进入教师详情页
     testsuite.addTest(cases.TeachersTestCase("test_teachers_page"))
-
-    runner = unittest.TextTestRunner()
-    runner.run(testsuite)
-
-    # report_path = os.path.join(run_path, 'report')
-    # now = time.strftime('%Y-%m-%d %H-%M-%S')
     #
-    # filename = os.path.join(report_path, now + 'report.html')
-    # fp = open(filename, 'wb')
-    #
-    # runner = HTMLTestRunner(stream=fp,
-    #                         title='课程库测试结果',
-    #                         description='测试报告.')
+    # runner = unittest.TextTestRunner()
     # runner.run(testsuite)
+
+    report_path = os.path.join(run_path, 'report')
+    now = time.strftime('%Y-%m-%d %H-%M-%S')
+
+    filename = os.path.join(report_path, now + 'report.html')
+    fp = open(filename, 'wb')
+
+    runner = HTMLTestRunner(stream=fp,
+                            title='课程库测试结果',
+                            description='测试报告.')
+    runner.run(testsuite)

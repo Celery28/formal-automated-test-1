@@ -6,7 +6,7 @@ class Homepage(Page):
     课工场网站首页模型
     """
 
-    url = "http://www.kgc.cn"
+    url = "http://www.kgc.dev.cn"
 
     def act_courses(self):
         """
