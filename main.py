@@ -86,16 +86,10 @@ if __name__ == '__main__':
     """
     教师列表页测试用例
     """
-<<<<<<< HEAD
     # 验证随机筛选教师方向
     testsuite.addTest(cases.TeachersTestCase("test_teachers_category"))
     # 随机进入教师详情页
     testsuite.addTest(cases.TeachersTestCase("test_teachers_page"))
-=======
-    # # 验证随机筛选教师方向
-    # testsuite.addTest(cases.TeachersTestCase("test_teachers_category"))
-    # # 随机进入教师详情页
-    # testsuite.addTest(cases.TeachersTestCase("test_teachers_page"))
 
     """
     教师详情页测试用例
