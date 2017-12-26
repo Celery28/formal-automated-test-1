@@ -70,6 +70,55 @@ class Teacher(Page):
         except exceptions.NoSuchElementException:
             return False
 
+    def is_exist_course_video(self):
+        """
+        检查是否存在课程视频
+        :return:
+        """
+
+        try:
+            self.driver.find_element_by_link_text("课程视频")
+            return True
+        except exceptions.NoSuchElementException:
+            return False
+
+    def is_exist_course_pages(self):
+        """
+        检查是否存在课程分页
+        :return:
+        """
+
+        try:
+            self.driver.find_element_by_css_selector("div.pager")
+            return True
+        except exceptions.NoSuchElementException:
+            return False
+
+    def get_random_course_video(self):
+        """
+        随机选择课程
+        :return:
+        """
+
+        courses = self.driver.find_elements_by_css_selector("ul.box-img li")
+        if len(courses) == 0:
+            raise exceptions.NoSuchElementException("没有找到任何课程")
+        course = courses[random.randint(0, len(courses) - 1)]
+
+        return course
+
+    def get_random_course_pages(self):
+        """
+        随机选择课程分页
+        :return:
+        """
+        pages = self.driver.find_elements_by_css_selector("ul.yiiPager li")
+        if len(pages) == 0:
+            raise exceptions.NoSuchElementException("没有找到任何任何分页")
+        page = pages[random.randint(2, len(pages) - 1)]
+
+        return page
+
     def act_click_favorite(self) -> None:
         """
         点击关注按钮.
