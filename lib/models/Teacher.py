@@ -47,6 +47,29 @@ class Teacher(Page):
         except exceptions.NoSuchElementException:
             return False
 
+    def is_exist_same_teacher_direction(self):
+        """
+        检查是否存在同方向其他讲师
+        :return:
+        """
+        try:
+            self.driver.find_element_by_link_text("同方向其他讲师")
+            return True
+        except exceptions.NoSuchElementException:
+            return False
+
+    def is_exist_gold_medal_teacher(self):
+        """
+        检查是否存在金牌讲师
+        :return:
+        """
+
+        try:
+            self.driver.find_element_by_xpath("/html/body/div[2]/div/div/div[2]/div/div[1]")
+            return True
+        except exceptions.NoSuchElementException:
+            return False
+
     def act_click_favorite(self) -> None:
         """
         点击关注按钮.
@@ -68,3 +91,25 @@ class Teacher(Page):
             self.driver.find_element_by_css_selector('a.teach-has-sc').click()
         except exceptions.NoSuchElementException:
             pass
+
+    def act_click_vote_for_teacher(self) -> None:
+        """
+        对教师点赞.
+
+        :return:
+        """
+        self.driver.find_element_by_css_selector("span.teacher-zan-num").click()
+
+    def act_click_random_same_teacher_direction(self):
+        """
+        随机点击同方向的教师
+        :return:
+        """
+        pass
+
+    def act_click_random_gold_medal_teacher(self):
+        """
+        随机点击金牌讲师
+        :return:
+        """
+        pass
