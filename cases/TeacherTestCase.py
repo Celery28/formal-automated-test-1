@@ -50,14 +50,13 @@ class TeacherTestCase(TestCase):
         :return:
         """
 
-        self.teachers.act_click_random_teacher()
-
-        teacher = models.Teacher(self.driver)
-        if teacher.is_vote_for_teacher() is True:
-            """已经点过赞，换一个教师试试"""
+        teacher = self._get_effective_teacher()
+        if teacher is None:
+            self.close_browser_current_tab_on_tear_down = False
+            raise Exception("本次测试没有找到未点赞的教师")
 
         teacher.act_click_vote_for_teacher()
-        self.assertTrue(teacher.is_vote_for_teacher(), "验证教师点赞失败")
+        self.assertTrue(teacher.is_vote_for_teacher(), '验证教师点赞失败')
 
     @decorators.TestCaseDecorators.screen_shot_in_except("教师详情页_随机进入同方向见识失败")
     def test_same_direction_teacher(self):
@@ -76,6 +75,22 @@ class TeacherTestCase(TestCase):
         """
 
         pass
+
+    def _get_effective_teacher(self):
+        """
+        获取一个未点赞的有效教师.
+
+        :return: 
+        """
+        for i in range(0, 3):
+            # self.teachers.act_click_random_teacher()
+
+            teacher = models.Teacher(self.driver)
+            if teacher.is_vote_for_teacher() is True:
+                teacher.close()
+                continue
+            return teacher
+        return None
 
 
 
