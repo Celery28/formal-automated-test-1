@@ -54,6 +54,11 @@ class Teachers(Page):
         return teacher
 
     def get_teacher_info(self, teacher):
+        """
+        获得教师的信息
+        :param teacher: 
+        :return: 
+        """
 
         teacher_name = teacher.find_element_by_css_selector("span.f18").text
         teacher_classroom = teacher.find_element_by_css_selector("a.goto-look")
@@ -66,4 +71,18 @@ class Teachers(Page):
         
         :return: 
         """
+
         self.get_random_teachers_category().click()
+
+    def act_click_random_teacher(self):
+        """
+        随机进入一个教师详情页
+        :return: 
+        """
+
+        self.act_random_teachers_category()
+        teacher_classroom = self.get_teacher_info(self.get_current_list_teacher())[1]
+        teacher_classroom.click()
+
+
+

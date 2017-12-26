@@ -86,10 +86,32 @@ if __name__ == '__main__':
     """
     教师列表页测试用例
     """
+<<<<<<< HEAD
     # 验证随机筛选教师方向
     testsuite.addTest(cases.TeachersTestCase("test_teachers_category"))
     # 随机进入教师详情页
     testsuite.addTest(cases.TeachersTestCase("test_teachers_page"))
+=======
+    # # 验证随机筛选教师方向
+    # testsuite.addTest(cases.TeachersTestCase("test_teachers_category"))
+    # # 随机进入教师详情页
+    # testsuite.addTest(cases.TeachersTestCase("test_teachers_page"))
+
+    """
+    教师详情页测试用例
+    """
+    # 验证教师详情页关注功能
+    testsuite.addTest(cases.TeacherTestCase("test_teacher_details_favorite"))
+
+    runner = unittest.TextTestRunner()
+    runner.run(testsuite)
+
+    # report_path = os.path.join(run_path, 'report')
+    # now = time.strftime('%Y-%m-%d %H-%M-%S')
+    #
+    # filename = os.path.join(report_path, now + 'report.html')
+    # fp = open(filename, 'wb')
+>>>>>>> a533b258fb2e24805915aba1ced60832c001648b
     #
     # runner = unittest.TextTestRunner()
     # runner.run(testsuite)

@@ -42,10 +42,10 @@ class CourseTestCase(TestCase):
         course.act_click_buy_button()
         self.assertTrue(course.is_buy_success(), '应该购买成功')
 
-    @decorators.TestCaseDecorators.screen_shot_in_except("验证收费课程购买失败")
+    @decorators.TestCaseDecorators.screen_shot_in_except("验证K币收费课程购买失败")
     def test_no_free_course_buy(self):
         """
-        收费课程购买测试用例.
+        K币收费课程购买测试用例.
         
         :return: 
         """
@@ -65,7 +65,7 @@ class CourseTestCase(TestCase):
         course = self._get_effective_course(_validate_course)
         if course is None:
             self.close_browser_current_tab_on_tear_down = False
-            raise Exception("本次测试没有找到支持kb购买的免费课程")
+            raise Exception("本次测试没有找到支持kb购买的课程")
 
         course.act_select_k_coins_pay_method()
         course.act_click_confirm_buy()
@@ -138,7 +138,7 @@ class CourseTestCase(TestCase):
             course.act_click_favorite_for_teacher()
             self.assertTrue(course.is_favorite_for_teacher(), '点击关注教师按钮失败')
 
-        if course.is_favorite_for_teacher() is False:
+        if course.is_un_favorite_for_teacher() is True:
             course.act_click_favorite_for_teacher()
             self.assertTrue(course.is_favorite_for_teacher(), '点击关注教师按钮失败')
 
