@@ -54,8 +54,11 @@ class Teacher(Page):
         :return:
         """
         try:
-            self.driver.find_element_by_link_text("同方向其他讲师")
-            return True
+            wrap = self.driver.find_elements_by_css_selector("yui3-u-4-17 .contents")
+
+            if 2 == len(wrap):
+                return True
+            return False
         except exceptions.NoSuchElementException:
             return False
 

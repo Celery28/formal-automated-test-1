@@ -1,4 +1,4 @@
-import random
+import random, time
 
 from lib.models import Page
 
@@ -19,14 +19,14 @@ class Teachers(Page):
         :return:
         """
         try:
-            self.driver.find_element_by_css_selector("ul.teacher-list li")
+            self.driver.find_elements_by_css_selector("ul.teacher-list li")
             return True
         except exceptions.NoSuchElementException:
             return False
 
     def get_random_teachers_category(self):
         """
-        随机获取教师方向并点击
+        随机获取教师方向
 
         :return:
         """
@@ -64,15 +64,15 @@ class Teachers(Page):
 
         return teacher
 
-    def get_teacher_info(self, teacher):
+    def get_teacher_info(self, teacher_info):
         """
         获得教师的信息
-        :param teacher: 
+        :param teacher_info:
         :return: 
         """
 
-        teacher_name = teacher.find_element_by_css_selector("span.f18").text
-        teacher_classroom = teacher.find_element_by_css_selector("a.goto-look")
+        teacher_name = teacher_info.find_element_by_css_selector("span.f18").text
+        teacher_classroom = teacher_info.find_element_by_css_selector("a.goto-look")
 
         return teacher_name, teacher_classroom
 
@@ -82,9 +82,17 @@ class Teachers(Page):
         
         :return: 
         """
+        self.get_random_teachers_category().click()
+
+        has_teachers = False
         for i in range(0, 3):
             if self.is_exist_teacher_in_direction() is True:
-                self.get_random_teachers_category().click()
+                has_teachers = True
+                break
+            self.get_random_teachers_category().click()
+
+        if has_teachers is False:
+            raise exceptions.NoSuchElementException("没有找到存在教师的教师方向")
 
     def act_click_random_teacher(self):
         """

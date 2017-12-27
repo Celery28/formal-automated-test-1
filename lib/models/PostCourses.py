@@ -10,7 +10,7 @@ class PostCourses(Page):
     岗位课列表模型
     """
 
-    url = "http://www.kgc.dev.cn/job"
+    url = "http://www.kgc.cn/job"
 
     def get_random_post_courses(self):
         """

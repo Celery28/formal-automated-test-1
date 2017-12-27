@@ -100,7 +100,7 @@ class TeacherTestCase(TestCase):
     #         return teacher
     #     return None
 
-    def _get_effective_teacher(self, validate_callbacks: list or function):
+    def _get_effective_teacher(self, validate_callbacks: list):
         """
         获取一个有效教师.
 
@@ -116,15 +116,15 @@ class TeacherTestCase(TestCase):
                 allow = True
                 for callback in validate_callbacks:
                     if not models.Teacher.__dict__[callback['callback']](teacher) is callback['result']:
-                        teacher.close()
+                        # teacher.close()
                         allow = False
                         break
                 if allow is False:
                     continue
-            elif callable(validate_callbacks):
-                if validate_callbacks(teacher) is False:
-                    teacher.close()
-                    continue
+            # elif callable(validate_callbacks):
+            #     if validate_callbacks(teacher) is False:
+            #         teacher.close()
+            #         continue
             return teacher
         return None
 

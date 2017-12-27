@@ -196,7 +196,7 @@ class CourseTestCase(TestCase):
 
         # TODO:未完成
 
-    def _get_effective_course(self, validate_callbacks: list or function):
+    def _get_effective_course(self, validate_callbacks: list):
         """
         获取一个有效课程.
         
