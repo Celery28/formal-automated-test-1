@@ -83,7 +83,7 @@ class TeacherTestCase(TestCase):
         :return: 
         """
         for i in range(0, 3):
-            # self.teachers.act_click_random_teacher()
+            self.teachers.select_teacher_again()
 
             teacher = models.Teacher(self.driver)
             if teacher.is_vote_for_teacher() is True:

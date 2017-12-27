@@ -11,7 +11,7 @@ class Courses(Page):
     课程库列表页模型
     """
 
-    url = 'http://www.kgc.dev.cn/list'
+    url = 'http://www.kgc.cn/list'
 
     title_link_css_selector = 'a.course-title-a'
 
@@ -473,3 +473,4 @@ class Courses(Page):
         if '全部' != difficulty_level.text:
             self.action_chains.move_to_element(difficulty_level).perform()
             self.driver.find_element_by_link_text('全部').click()
+

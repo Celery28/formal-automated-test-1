@@ -84,5 +84,14 @@ class Teachers(Page):
         teacher_classroom = self.get_teacher_info(self.get_current_list_teacher())[1]
         teacher_classroom.click()
 
+    def select_teacher_again(self):
+        """
+        回到教师列表页，再次选择教师，进入教师详情页
+        :return:
+        """
+
+        self.driver.get(self.url)
+        self.act_click_random_teacher()
+
 
 
