@@ -95,6 +95,33 @@ class Teacher(Page):
         except exceptions.NoSuchElementException:
             return False
 
+    def get_random_same_teacher_direction(self):
+        """
+        随机选择同方向其他讲师
+        :return:
+        """
+        same_teachers = self.driver.find_elements_by_xpath("/html/body/div[2]/div/div/div[2]/div[1]/div[2]/ul/li")
+
+        if len(same_teachers) == 0:
+            raise exceptions.NoSuchElementException("没有找到同方向的讲师")
+        same_teacher = same_teachers[random.randint(0, len(same_teachers) - 1)]
+
+        return same_teacher
+
+    def get_random_gold_medal_teacher(self):
+        """
+        随机选择金牌讲师
+        :return:
+        """
+
+        gold_medal_teachers = self.driver.find_elements_by_xpath("/html/body/div[2]/div/div/div[2]/div[2]/div[2]/ul/li")
+
+        if len(gold_medal_teachers) == 0:
+            raise exceptions.NoSuchElementException("没有找到同方向的讲师")
+        gold_medal_teacher = gold_medal_teachers[random.randint(0, len(gold_medal_teachers) - 1)]
+
+        return gold_medal_teacher
+
     def get_random_course_video(self):
         """
         随机选择课程
@@ -113,12 +140,23 @@ class Teacher(Page):
         随机选择课程分页
         :return:
         """
+
         pages = self.driver.find_elements_by_css_selector("ul.yiiPager li")
         if len(pages) == 0:
             raise exceptions.NoSuchElementException("没有找到任何任何分页")
         page = pages[random.randint(2, len(pages) - 1)]
 
         return page
+
+    def get_teacher_name(self, teacher):
+        """
+        获得教师名称
+        :param teacher:教师的名字
+        :return:
+        """
+
+        teacher_name = teacher.find_element_by_css_selector("p a").text
+        return teacher_name
 
     def act_click_favorite(self) -> None:
         """
@@ -149,6 +187,13 @@ class Teacher(Page):
         :return:
         """
         self.driver.find_element_by_css_selector("span.teacher-zan-num").click()
+
+    def act_click_random_course_pages(self):
+        """
+        随机点击课程分页
+        :return:
+        """
+        pass
 
     def act_click_random_same_teacher_direction(self):
         """

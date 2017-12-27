@@ -13,6 +13,17 @@ class Teachers(Page):
 
     url = 'http://www.kgc.cn/teachers'
 
+    def is_exist_teacher_in_direction(self):
+        """
+        判断方向下是否存在讲师
+        :return:
+        """
+        try:
+            self.driver.find_element_by_css_selector("ul.teacher-list li")
+            return True
+        except exceptions.NoSuchElementException:
+            return False
+
     def get_random_teachers_category(self):
         """
         随机获取教师方向并点击
@@ -67,12 +78,13 @@ class Teachers(Page):
 
     def act_random_teachers_category(self):
         """
-        随机进入一个教师方向
+        随机进入一个有效的教师方向
         
         :return: 
         """
-
-        self.get_random_teachers_category().click()
+        for i in range(0, 3):
+            if self.is_exist_teacher_in_direction() is True:
+                self.get_random_teachers_category().click()
 
     def act_click_random_teacher(self):
         """
@@ -84,7 +96,7 @@ class Teachers(Page):
         teacher_classroom = self.get_teacher_info(self.get_current_list_teacher())[1]
         teacher_classroom.click()
 
-    def select_teacher_again(self):
+    def act_click_select_teacher_again(self):
         """
         回到教师列表页，再次选择教师，进入教师详情页
         :return:

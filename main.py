@@ -9,7 +9,6 @@
 
 import os
 import time
-
 import cases
 import unittest
 from lib.unittest_.runner import HTMLTestRunner
@@ -97,10 +96,9 @@ if __name__ == '__main__':
     # 验证教师详情页关注功能
     testsuite.addTest(cases.TeacherTestCase("test_teacher_details_favorite"))
     # 验证教师点赞功能
-    # ？ 未开发完成，循环功能暂未开发
     testsuite.addTest(cases.TeacherTestCase("test_teacher_zan"))
     # # 验证随机进入同方向讲师
-    # testsuite.addTest(cases.TeacherTestCase("test_same_direction_teacher"))
+    testsuite.addTest(cases.TeacherTestCase("test_same_direction_teacher"))
     # # 验证随机进入金牌讲师页面
     # testsuite.addTest(cases.TeacherTestCase("test_gold_medal_teacher"))
 

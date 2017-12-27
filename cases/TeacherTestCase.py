@@ -50,7 +50,7 @@ class TeacherTestCase(TestCase):
         :return:
         """
 
-        teacher = self._get_effective_teacher()
+        teacher = self._get_effective_teacher([{'callback': 'is_vote_for_teacher', 'result': False}])
         if teacher is None:
             self.close_browser_current_tab_on_tear_down = False
             raise Exception("本次测试没有找到未点赞的教师")
@@ -58,14 +58,22 @@ class TeacherTestCase(TestCase):
         teacher.act_click_vote_for_teacher()
         self.assertTrue(teacher.is_vote_for_teacher(), '验证教师点赞失败')
 
-    @decorators.TestCaseDecorators.screen_shot_in_except("教师详情页_随机进入同方向见识失败")
+    @decorators.TestCaseDecorators.screen_shot_in_except("教师详情页_随机进入同方向讲师失败")
     def test_same_direction_teacher(self):
         """
         验证随机进入同方向讲师
         :return:
         """
+        teacher = self._get_effective_teacher([{'callback': 'is_exist_same_teacher_direction', 'result': True}])
+        if teacher is None:
+            self.close_browser_current_tab_on_tear_down = False
+            raise Exception("本次测试没有找到有同方向的讲师")
 
-        pass
+        same_teacher = teacher.get_random_same_teacher_direction()
+        same_teacher_name = teacher.get_teacher_name(same_teacher)
+        same_teacher.click()
+
+        self.assertEqual(self.driver.title(), "{0} - 讲师 - 课工场".format(same_teacher_name), "测试不通过")
 
     @decorators.TestCaseDecorators.screen_shot_in_except("教师详情页_随机进入金牌讲师失败")
     def test_gold_medal_teacher(self):
@@ -76,19 +84,47 @@ class TeacherTestCase(TestCase):
 
         pass
 
-    def _get_effective_teacher(self):
-        """
-        获取一个未点赞的有效教师.
+    # def _get_effective_teacher_a(self):
+    #     """
+    #     获取一个未点赞的有效教师.
+    #
+    #     :return:
+    #     """
+    #     for i in range(0, 3):
+    #         self.teachers.act_click_select_teacher_again()
+    #
+    #         teacher = models.Teacher(self.driver)
+    #         if teacher.is_vote_for_teacher() is True:
+    #             teacher.close()
+    #             continue
+    #         return teacher
+    #     return None
 
-        :return: 
+    def _get_effective_teacher(self, validate_callbacks: list or function):
+        """
+        获取一个有效教师.
+
+        :param validate_callbacks: 验证方法的回调方法列表或者回调函数
+            [{'callback': 方法名称}, ...] or def callback(course) -> bool: pass
+        :return:
         """
         for i in range(0, 3):
-            self.teachers.select_teacher_again()
+            self.teachers.act_click_select_teacher_again()
 
             teacher = models.Teacher(self.driver)
-            if teacher.is_vote_for_teacher() is True:
-                teacher.close()
-                continue
+            if isinstance(validate_callbacks, list):
+                allow = True
+                for callback in validate_callbacks:
+                    if not models.Teacher.__dict__[callback['callback']](teacher) is callback['result']:
+                        teacher.close()
+                        allow = False
+                        break
+                if allow is False:
+                    continue
+            elif callable(validate_callbacks):
+                if validate_callbacks(teacher) is False:
+                    teacher.close()
+                    continue
             return teacher
         return None
 
