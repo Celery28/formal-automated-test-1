@@ -48,7 +48,7 @@ class Teacher(Page):
         except exceptions.NoSuchElementException:
             return False
 
-    def is_exist_same_teacher_direction(self):
+    def has_same_teacher_direction(self):
         """
         检查是否存在同方向其他讲师
         :return:
@@ -62,7 +62,7 @@ class Teacher(Page):
         except exceptions.NoSuchElementException:
             return False
 
-    def is_exist_gold_medal_teacher(self):
+    def has_gold_medal_teacher(self):
         """
         检查是否存在金牌讲师
         :return:
@@ -74,7 +74,7 @@ class Teacher(Page):
         except exceptions.NoSuchElementException:
             return False
 
-    def is_exist_course_video(self):
+    def has_course_video(self):
         """
         检查是否存在课程视频
         :return:
@@ -86,7 +86,7 @@ class Teacher(Page):
         except exceptions.NoSuchElementException:
             return False
 
-    def is_exist_course_pages(self):
+    def has_course_pages(self):
         """
         检查是否存在课程分页
         :return:
@@ -100,10 +100,10 @@ class Teacher(Page):
 
     def get_random_same_teacher_direction(self):
         """
-        随机选择同方向其他讲师
+        随机获取同方向其他讲师
         :return:
         """
-        same_teachers = self.driver.find_elements_by_xpath("/html/body/div[2]/div/div/div[2]/div[1]/div[2]/ul/li")
+        same_teachers = self.driver.find_elements_by_css_selector("yui3-u-4-17 div.contents:first-child li")
 
         if len(same_teachers) == 0:
             raise exceptions.NoSuchElementException("没有找到同方向的讲师")
@@ -189,7 +189,7 @@ class Teacher(Page):
 
         :return:
         """
-        self.driver.find_element_by_css_selector("span.teacher-zan-num").click()
+        self.driver.find_element_by_css_selector("a.teacher-zan").click()
 
     def act_click_random_course_pages(self):
         """

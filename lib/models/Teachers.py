@@ -50,7 +50,7 @@ class Teachers(Page):
 
         return category_name[0]
 
-    def get_current_list_teacher(self):
+    def get_random_teacher(self):
         """
         随机获取当前页面教师列表中的教师
 
@@ -76,23 +76,14 @@ class Teachers(Page):
 
         return teacher_name, teacher_classroom
 
-    def act_random_teachers_category(self):
+    def act_click_random_category(self):
         """
-        随机进入一个有效的教师方向
-        
+        随机进入一个教师方向
         :return: 
         """
-        self.get_random_teachers_category().click()
 
-        has_teachers = False
-        for i in range(0, 3):
-            if self.is_exist_teacher_in_direction() is True:
-                has_teachers = True
-                break
-            self.get_random_teachers_category().click()
-
-        if has_teachers is False:
-            raise exceptions.NoSuchElementException("没有找到存在教师的教师方向")
+        category = self.get_random_teachers_category()
+        category.click()
 
     def act_click_random_teacher(self):
         """
@@ -100,18 +91,7 @@ class Teachers(Page):
         :return: 
         """
 
-        self.act_random_teachers_category()
-        teacher_classroom = self.get_teacher_info(self.get_current_list_teacher())[1]
-        teacher_classroom.click()
-
-    def act_click_select_teacher_again(self):
-        """
-        回到教师列表页，再次选择教师，进入教师详情页
-        :return:
-        """
-
-        self.driver.get(self.url)
-        self.act_click_random_teacher()
-
-
-
+        teacher = self.get_random_teacher()
+        if teacher is not None:
+            teacher_classroom = self.get_teacher_info(teacher)[1]
+            teacher_classroom.click()

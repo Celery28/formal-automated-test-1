@@ -26,8 +26,8 @@ class TeacherTestCase(TestCase):
         测试教师关注/取消关注
         :return: 
         """
+        self.teachers = models.Teachers(self.driver)
         self.teachers.act_click_random_teacher()
-
         teacher = models.Teacher(self.driver)
         if teacher.is_favorite_for_teacher() is True:
             teacher.act_click_cancel_favorite()
@@ -49,13 +49,14 @@ class TeacherTestCase(TestCase):
         测试教师点赞
         :return:
         """
+        self.teachers = models.Teachers(self.driver)
 
         teacher = self._get_effective_teacher([{'callback': 'is_vote_for_teacher', 'result': False}])
         if teacher is None:
             self.close_browser_current_tab_on_tear_down = False
             raise Exception("本次测试没有找到未点赞的教师")
-
         teacher.act_click_vote_for_teacher()
+
         self.assertTrue(teacher.is_vote_for_teacher(), '验证教师点赞失败')
 
     @decorators.TestCaseDecorators.screen_shot_in_except("教师详情页_随机进入同方向讲师失败")
@@ -64,7 +65,8 @@ class TeacherTestCase(TestCase):
         验证随机进入同方向讲师
         :return:
         """
-        teacher = self._get_effective_teacher([{'callback': 'is_exist_same_teacher_direction', 'result': True}])
+        self.teachers = models.Teachers(self.driver)
+        teacher = self._get_effective_teacher([{'callback': 'has_same_teacher_direction', 'result': True}])
         if teacher is None:
             self.close_browser_current_tab_on_tear_down = False
             raise Exception("本次测试没有找到有同方向的讲师")
@@ -108,24 +110,25 @@ class TeacherTestCase(TestCase):
             [{'callback': 方法名称}, ...] or def callback(course) -> bool: pass
         :return:
         """
-        for i in range(0, 3):
-            self.teachers.act_click_select_teacher_again()
 
+        for i in range(0, 3):
+            self.teachers.act_click_random_category()
+            teacher = self.teachers.get_random_teacher()
+            if teacher is None:
+                continue
+            self.teachers.get_teacher_info(teacher)[1].click()
             teacher = models.Teacher(self.driver)
             if isinstance(validate_callbacks, list):
                 allow = True
                 for callback in validate_callbacks:
                     if not models.Teacher.__dict__[callback['callback']](teacher) is callback['result']:
-                        # teacher.close()
                         allow = False
                         break
                 if allow is False:
+                    self.driver.back()
                     continue
-            # elif callable(validate_callbacks):
-            #     if validate_callbacks(teacher) is False:
-            #         teacher.close()
-            #         continue
             return teacher
+
         return None
 
 

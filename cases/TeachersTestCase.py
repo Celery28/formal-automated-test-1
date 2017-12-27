@@ -32,11 +32,11 @@ class TeachersTestCase(TestCase):
     def test_teachers_page(self):
         """随机进入教师详情页"""
 
-        teacher = self.teachers.get_current_list_teacher()
+        teacher = self.teachers.get_random_teacher()
 
         while teacher is None:
-            self.teachers.act_random_teachers_category()
-            teacher = self.teachers.get_current_list_teacher()
+            self.teachers.act_click_random_category()
+            teacher = self.teachers.get_random_teacher()
 
         teacher_name, teacher_classroom = self.teachers.get_teacher_info(teacher)
         teacher_classroom.click()
