@@ -14,7 +14,7 @@ class CoursesTestCase(TestCase):
     def setUpClass(cls):
         TestCase.run_as = 'Chrome'
         TestCase.setUpClass()
-        cls.courses = models.Courses(cls.driver)
+        cls.courses = models.Courses(cls.driver, cls.config.URL.courses_url)
 
     def setUp(self):
         """

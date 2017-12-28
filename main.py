@@ -7,14 +7,25 @@
 :author: ronghui.huo <ronghui.huo@kgc.cn>
 """
 
+import sys
 import os
 import time
 import cases
 import unittest
+import getopt
+
+from lib import unittest_
 from lib.unittest_.runner import HTMLTestRunner
-# from linux import test_UT
 
 run_path = os.path.split(os.path.realpath(__file__))[0]
+opts, args = getopt.getopt(sys.argv[1:], 'e:')
+
+environment = 'production'
+for key, value in opts:
+    if '-e' == key:
+        environment = value
+
+unittest_.TestCase.set_environment(environment)
 
 if __name__ == '__main__':
 

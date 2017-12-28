@@ -18,6 +18,7 @@ class Page:
         """
         初始化页面
         :param driver:
+        :param url:
         """
         self.driver = driver
         self.driver.implicitly_wait(3)

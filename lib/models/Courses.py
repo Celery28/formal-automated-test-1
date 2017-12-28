@@ -1,5 +1,4 @@
 import random
-# import configparser
 
 from lib.models import Page
 
@@ -11,10 +10,7 @@ class Courses(Page):
     """
     课程库列表页模型
     """
-    # config = configparser.ConfigParser()
-    # config.read("course-test-case.ini")
-    courses_url = config.get("URL", "courses_url")
-    # url = 'http://www.kgc.dev.cn/list'
+    url = 'http://www.kgc.cn/list'
 
     title_link_css_selector = 'a.course-title-a'
 

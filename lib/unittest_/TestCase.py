@@ -9,6 +9,8 @@ class TestCase(unittest.TestCase):
     """
     扩展基础TestCase类.
     """
+
+    environment = 'production'
     
     run_as = 'Chrome'
 
@@ -20,7 +22,7 @@ class TestCase(unittest.TestCase):
 
     def __init__(self, methodName: str='runTest'):
         if not TestCase.config:
-            TestCase.config = utils.Config()
+            TestCase.config = utils.Config(None, self.environment)
         unittest.TestCase.__init__(self, methodName)
 
     @classmethod
@@ -51,3 +53,12 @@ class TestCase(unittest.TestCase):
         :return: 
         """
         cls.driver.quit()
+
+    @classmethod
+    def set_environment(cls, environment):
+        """
+        设置运行时环境
+        :param environment: 
+        :return: 
+        """
+        cls.environment = environment
