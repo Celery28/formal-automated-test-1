@@ -17,7 +17,7 @@ class CourseTestCase(TestCase):
         TestCase.run_as = 'Chrome'
         TestCase.setUpClass()
 
-        url = cls.config.CourseTestCase.courses_url
+        url = cls.config.URL.courses_url
         cls.courses = models.Courses(cls.driver, url if url else 'http://www.kgc.cn/list')
         cls.login = models.Login(cls.driver)
         cls.login.act_login(cls.config.User.username, cls.config.User.password)
