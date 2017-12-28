@@ -35,18 +35,18 @@ if __name__ == '__main__':
     """
     课程库列表页测试用例
     """
-    # # 验证课程库列表课程数量
-    # testsuite.addTest(cases.CoursesTestCase("test_courses_number"))
-    # # 验证课程库列表课程方向筛选
-    # testsuite.addTest(cases.CoursesTestCase("test_first_category"))
-    # # 验证课程库列表课程分类筛选
-    # testsuite.addTest(cases.CoursesTestCase("test_sub_category"))
-    # # 验证课程库列表筛选课程最新最热状态
-    # testsuite.addTest(cases.CoursesTestCase("test_courses_sort"))
-    # # 验证课程库收费与免费过滤器
-    # testsuite.addTest((cases.CoursesTestCase("test_courses_price_filter")))
-    # # 验证课程库列表筛选课程难度
-    # testsuite.addTest(cases.CoursesTestCase("test_course_difficulty_level"))
+    # 验证课程库列表课程数量
+    testsuite.addTest(cases.CoursesTestCase("test_courses_number"))
+    # 验证课程库列表课程方向筛选
+    testsuite.addTest(cases.CoursesTestCase("test_first_category"))
+    # 验证课程库列表课程分类筛选
+    testsuite.addTest(cases.CoursesTestCase("test_sub_category"))
+    # 验证课程库列表筛选课程最新最热状态
+    testsuite.addTest(cases.CoursesTestCase("test_courses_sort"))
+    # 验证课程库收费与免费过滤器
+    testsuite.addTest((cases.CoursesTestCase("test_courses_price_filter")))
+    # 验证课程库列表筛选课程难度
+    testsuite.addTest(cases.CoursesTestCase("test_course_difficulty_level"))
 
     """
     李伟用例
@@ -98,7 +98,7 @@ if __name__ == '__main__':
     # 验证教师点赞功能
     # testsuite.addTest(cases.TeacherTestCase("test_teacher_zan"))
     # # 验证随机进入同方向讲师
-    testsuite.addTest(cases.TeacherTestCase("test_same_direction_teacher"))
+    # testsuite.addTest(cases.TeacherTestCase("test_same_direction_teacher"))
     # # 验证随机进入金牌讲师页面
     # testsuite.addTest(cases.TeacherTestCase("test_gold_medal_teacher"))
 

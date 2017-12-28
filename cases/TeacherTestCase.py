@@ -49,7 +49,7 @@ class TeacherTestCase(TestCase):
         测试教师点赞
         :return:
         """
-        self.teachers = models.Teachers(self.driver)
+        # self.teachers = models.Teachers(self.driver)
 
         teacher = self._get_effective_teacher([{'callback': 'is_vote_for_teacher', 'result': False}])
         if teacher is None:
