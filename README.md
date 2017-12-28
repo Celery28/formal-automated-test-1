@@ -20,3 +20,8 @@
 
 ## 4.执行测试
 ```python3 main.py```
+
+# 允许通过命令行参数指定运行的测试环境
+```python3 main.py -e development```
+```python3 main.py -e pre-production```
+```python3 main.py -e production```
