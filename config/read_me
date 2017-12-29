@@ -7,3 +7,11 @@
 在多个配置文件存在相同section的情况下，根据配置文件的读取顺序，后边文件中的配置覆盖前边的配置
 
 帮助文档请查看：https://docs.python.org/3/library/configparser.html
+
+## 4.执行测试
+```python3 main.py```
+
+# 允许通过命令行参数指定运行的测试环境
+```python3 main.py -e development```
+```python3 main.py -e pre-production```
+```python3 main.py -e production```

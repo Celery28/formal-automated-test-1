@@ -24,7 +24,7 @@ class HomepageTestCase(TestCase):
         self.homepage.act_switch_to_last_window()
         current_url = self.homepage.get_current_page_url()
 
-        self.assertEqual(current_url, "http://www.kgc.cn/list/230-1-6-9-9-0.shtml", "测试不通过")
+        self.assertEqual(current_url, self.config.URL.courses_url, "测试不通过")
 
     @decorators.TestCaseDecorators.screen_shot_in_except("进入就业实训界面失败")
     def test_act_employment_base(self):
@@ -34,7 +34,7 @@ class HomepageTestCase(TestCase):
         self.homepage.act_switch_to_last_window()
         current_url = self.homepage.get_current_page_url()
 
-        self.assertEqual(current_url, "http://a.kgc.cn/", "测试不通过")
+        self.assertEqual(current_url, self.config.URL.a_kgc_cn_url, "测试不通过")
 
     @decorators.TestCaseDecorators.screen_shot_in_except("进入岗位课界面失败")
     def test_act_job(self):
@@ -44,7 +44,7 @@ class HomepageTestCase(TestCase):
         self.homepage.act_switch_to_last_window()
         current_url = self.homepage.get_current_page_url()
 
-        self.assertEqual(current_url, "http://www.kgc.cn/job", "测试不通过")
+        self.assertEqual(current_url, self.config.URL.post_url, "测试不通过")
 
     @decorators.TestCaseDecorators.screen_shot_in_except("进入金牌讲师界面失败")
     def test_act_teachers(self):
@@ -53,4 +53,4 @@ class HomepageTestCase(TestCase):
         self.homepage.act_teachers()
         current_url = self.homepage.get_current_page_url()
 
-        self.assertEqual(current_url, "http://www.kgc.cn/teachers", "测试不通过")
+        self.assertEqual(current_url, self.config.URL.teachers_url, "测试不通过")
