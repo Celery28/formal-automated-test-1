@@ -11,10 +11,19 @@ class Search(Page):
     """
     搜索页模型
     """
-    def search(self):
+
+    search_content = ['java', '测试']
+
+    def act_click_search(self):
         """
-        搜索
+        随机搜素某些关键字
         :return:
         """
-        search_content = ['java', '测试', '霍荣慧']
-        self.driver.find_element_by_css_selector('input.search-key').send_keys(random.choice(search_content))
+        self.driver.find_element_by_css_selector('input.search-key').send_keys(random.choice(self.search_content))
+        self.driver.find_element_by_css_selector('a.search1-btn').click()
+
+    def act_switch_to_course(self):
+        """
+
+        :return:
+        """
