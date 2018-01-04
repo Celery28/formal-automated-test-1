@@ -12,7 +12,7 @@ class TeacherTestCase(TestCase):
     def setUpClass(cls):
         TestCase.run_as = 'Chrome'
         TestCase.setUpClass()
-        cls.teachers = models.Teachers(cls.driver)
+        cls.teachers = models.Teachers(cls.driver, cls.config.URL.teachers_url)
         cls.login = models.Login(cls.driver)
         cls.login.act_login(cls.config.User.username, cls.config.User.password)
 
@@ -26,7 +26,7 @@ class TeacherTestCase(TestCase):
         测试教师关注/取消关注
         :return: 
         """
-        self.teachers = models.Teachers(self.driver)
+        self.teachers = models.Teachers(self.driver, self.config.URL.teachers_url)
         self.teachers.act_click_random_teacher()
         teacher = models.Teacher(self.driver)
         if teacher.is_favorite_for_teacher() is True:
@@ -49,7 +49,7 @@ class TeacherTestCase(TestCase):
         测试教师点赞
         :return:
         """
-        # self.teachers = models.Teachers(self.driver)
+        # self.teachers = models.Teachers(self.driver, self.config.URL.teachers_url)
 
         teacher = self._get_effective_teacher([{'callback': 'is_vote_for_teacher', 'result': False}])
         if teacher is None:
@@ -65,7 +65,7 @@ class TeacherTestCase(TestCase):
         验证随机进入同方向讲师
         :return:
         """
-        self.teachers = models.Teachers(self.driver)
+        self.teachers = models.Teachers(self.driver, self.config.URL.teachers_url)
         teacher = self._get_effective_teacher([{'callback': 'has_same_teacher_direction', 'result': True}])
         if teacher is None:
             self.close_browser_current_tab_on_tear_down = False

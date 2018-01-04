@@ -12,7 +12,7 @@ class TeachersTestCase(TestCase):
     def setUpClass(cls):
         TestCase.run_as = 'Chrome'
         TestCase.setUpClass()
-        cls.teachers = models.Teachers(cls.driver)
+        cls.teachers = models.Teachers(cls.driver, cls.config.URL.courses_url)
 
     def setUp(self):
         """将关闭浏览器标签的标志设置为False"""

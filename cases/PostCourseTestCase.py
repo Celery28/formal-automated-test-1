@@ -13,7 +13,7 @@ class PostCourseTestCase(TestCase):
     def setUpClass(cls):
         TestCase.run_as = 'Chrome'
         TestCase.setUpClass()
-        cls.post_courses = models.PostCourses(cls.driver)
+        cls.post_courses = models.PostCourses(cls.driver, cls.config.URL.post_url)
 
     @decorators.TestCaseDecorators.screen_shot_in_except("点击进入下一课失败")
     def test_next_course(self):

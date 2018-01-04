@@ -14,7 +14,7 @@ class HomepageTestCase(TestCase):
     def setUpClass(cls):
         TestCase.run_as = "Chrome"
         TestCase.setUpClass()
-        cls.homepage = models.Homepage(cls.driver)
+        cls.homepage = models.Homepage(cls.driver, cls.config.URL.homepage_url)
 
     @decorators.TestCaseDecorators.screen_shot_in_except("进入课程库失败")
     def test_act_courses(self):
