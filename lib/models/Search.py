@@ -81,14 +81,33 @@ class Search(Page):
         从教师列表页随机选择教师
         :return:
         """
-        pass
+        teachers = self.driver.find_elements_by_css_selector("ul.teacher-list li")
+        if len(teachers) == 0:
+            raise exceptions.NoSuchElementException("当前搜索结果下没有教师")
+
+        teacher = teachers[random.randint(0, len(teachers) - 1)]
+
+        return teacher
 
     def get_random_course_for_teacher(self):
         """
-        从所选教师中随机选择课程
+        从所选教师中随机获取课程
         :return:
         """
-        pass
+        teacher = self.get_random_teacher_for_teachers()
+        teacher_courses = teacher.find_elements_by_css_selector("dl.teacher-course dt")
+
+    def get_name_and_img_for_teacher(self):
+        """
+        从所选教师中获取教师名称和教师头像
+        :return:
+        """
+        teacher = self.get_random_teacher_for_teachers()
+
+        teacher_name = teacher.find_element_by_css_selector("span.f18")
+        teacher_img = teacher.find_element_by_css_selector("div.teacher-tx a img")
+
+        return teacher_name, teacher_img
 
     def get_random_student_for_students(self):
         """
