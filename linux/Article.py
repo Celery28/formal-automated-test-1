@@ -5,6 +5,9 @@
 from selenium import webdriver
 import time
 import random
+from pyvirtualdisplay import Display
+display = Display(visible=0, size=(2880,1720))
+display.start()
 class Article(object):
     def openC(self, url, Account, Password):
         '''

@@ -3,7 +3,7 @@
 # 作者:李伟
 # 主要内容：微社区;个人中心；商城冒烟用例
 from selenium import webdriver
-from linux import bbsj,PersonalC,shop,Training
+from linux import bbsj,PersonalC,shop,Training,GXLM,Article
 
 from unittest import TestCase
 import sys
@@ -31,7 +31,7 @@ class UT(TestCase):
     #     self.assertEqual(post,'true','测试通过')
     def test_follow(self):
         u'''关注'''
-        follow=Basics.follow()
+        follow=Basics.follow1()
         self.assertEqual(follow,'true','测试通过')
 class UT1(TestCase):
     def setUp(self):

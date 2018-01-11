@@ -14,7 +14,6 @@ import cases
 import unittest
 import getopt
 from linux import test_UT
-
 from lib import unittest_
 from lib.unittest_.runner import HTMLTestRunner
 
