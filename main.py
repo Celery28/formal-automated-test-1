@@ -13,6 +13,7 @@ import time
 import cases
 import unittest
 import getopt
+from linux import test_UT
 
 from lib import unittest_
 from lib.unittest_.runner import HTMLTestRunner
@@ -62,10 +63,12 @@ if __name__ == '__main__':
     """
     李伟用例
     """
-    # testsuite.addTest(unittest.makeSuite(test_UT.UT))
-    # testsuite.addTest(unittest.makeSuite(test_UT.UT1))
-    # testsuite.addTest(unittest.makeSuite(test_UT.UT2))
-    # testsuite.addTest(unittest.makeSuite(test_UT.UT3))
+    testsuite.addTest(unittest.makeSuite(test_UT.UT))
+    testsuite.addTest(unittest.makeSuite(test_UT.UT1))
+    testsuite.addTest(unittest.makeSuite(test_UT.UT2))
+    testsuite.addTest(unittest.makeSuite(test_UT.UT3))
+    testsuite.addTest(unittest.makeSuite(test_UT.UT4))
+    testsuite.addTest(unittest.makeSuite(test_UT.UT5))
 
     """
     课程详情页测试用例
