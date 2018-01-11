@@ -29,13 +29,15 @@ class Suite():
         suite.addTest(unittest.makeSuite(test_UT.UT1))
         suite.addTest(unittest.makeSuite(test_UT.UT2))
         suite.addTest(unittest.makeSuite(test_UT.UT3))
+        suite.addTest(unittest.makeSuite(test_UT.UT4))
+        suite.addTest(unittest.makeSuite(test_UT.UT5))
         # suite.addTest(UT('test_sign'))
         # suite.addTest(UT1('test_teacher'))
         # suite.addTest(UT1('test_course'))
         # suite.addTest(UT1('test_recycle'))
         file_name="./report1.html"
         file1=open(file_name,'wb')
-        runner=HTMLTestRunner.HTMLTestRunner(stream=file1,title=u'KGC冒烟用例',description=u'微社区测试报告')
+        runner=HTMLTestRunner.HTMLTestRunner(stream=file1,title=u'KGC冒烟用例',description=u'测试报告')
         runner.run(suite)
 if __name__=="__main__":
     Suite().test_suit_login()

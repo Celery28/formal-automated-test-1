@@ -11,7 +11,7 @@ class UT(TestCase):
     def setUp(self):
         global Basics
         Basics=bbsj.bbs()
-        Basics.openC('http://www.kgc.cn/bbs','502120020@qq.com','910227')
+        Basics.openC('http://www.kgc.dev.cn/bbs','13581917423','123456')
     def tearDown(self):
         global Basics
         Basics = bbsj.bbs()
@@ -25,10 +25,10 @@ class UT(TestCase):
     #     u'''回复帖子'''
     #     selected=Basics.Selected()
     #     self.assertEqual(selected,'true','测试通过')
-    def test_post(self):
-        u'''发帖'''
-        post=Basics.post()
-        self.assertEqual(post,'true','测试通过')
+    # def test_post(self):
+    #     u'''发帖'''
+    #     post=Basics.post()
+    #     self.assertEqual(post,'true','测试通过')
     def test_follow(self):
         u'''关注'''
         follow=Basics.follow()
@@ -37,7 +37,7 @@ class UT1(TestCase):
     def setUp(self):
         global Person
         Person=PersonalC.PersonalC()
-        Person.openC('http://www.kgc.cn/','502120020@qq.com','910227')
+        Person.openC('http://www.kgc.dev.cn/','13581917423','123456')
     def tearDown(self):
         global Person
         Person = PersonalC.PersonalC()
@@ -62,10 +62,10 @@ class UT1(TestCase):
         u'''动态'''
         dynamic=Person.dynamic()
         self.assertEqual(dynamic,'true','测试通过')
-    def test_Questions(self):
-        u'''题库'''
-        Questions=Person.Questions()
-        self.assertEqual(Questions,'true','测试通过')
+    # def test_Questions(self):
+    #     u'''题库'''
+    #     Questions=Person.Questions()
+    #     self.assertEqual(Questions,'true','测试通过')
     def test_Community(self):
         u'''个人中心发帖'''
         Community=Person.Community()
@@ -76,6 +76,7 @@ class UT1(TestCase):
         self.assertEqual(Community_Reply,'true','测试通过')
     def test_Community_Post(self):
         u'''关注帖子'''
+
         Community_Post=Person.Community_Post()
         self.assertEqual(Community_Post,'true','测试通过')
     def test_Community_follow(self):
@@ -106,23 +107,23 @@ class UT1(TestCase):
         u'''头像页面验证'''
         Set_up4=Person.Set_up4()
         self.assertEqual(Set_up4,'true','测试通过')
-# class UT2(TestCase):
-#     def setUp(self):
-#         global Shop
-#         Shop=shop.shop()
-#         Shop.openC('http://www.kgc.cn/goods','502120020@qq.com','910227')
-#     def tearDown(self):
-#         Shop = shop.shop()
-#         Shop.close()
-#     def test_Buy(self):
-#         u'''商城购买'''
-#         buy=Shop.Buy()
-#         self.assertEqual(buy,'true','测试通过')
+class UT2(TestCase):
+    def setUp(self):
+        global Shop
+        Shop=shop.shop()
+        Shop.openC('http://www.kgc.dev.cn/goods','13581917423','123456')
+    def tearDown(self):
+        Shop = shop.shop()
+        Shop.close()
+    def test_Buy(self):
+        u'''商城购买'''
+        buy=Shop.Buy()
+        self.assertEqual(buy,'true','测试通过')
 class UT3(TestCase):
     def setUp(self):
         global training
         training=Training.Training()
-        training.openC('http://www.kgc.cn/','502120020@qq.com','910227')
+        training.openC('http://a.kgc.dev.cn/','13581917423','123456')
     def tearDown(self):
         training.close()
     #     导航栏链接禁用
@@ -134,9 +135,38 @@ class UT3(TestCase):
         u'''观看初级，高级课程'''
         look=training.look()
         self.assertEqual(look,'true','测试通过')
-
+class UT4(TestCase):
+    def setUp(self):
+        global gxlm
+        gxlm=GXLM.gxlm()
+        gxlm.openC('http://www.kgc.dev.cn/','13581917423','123456')
+    def tearDown(self):
+        gxlm.close()
+    def test_ygxlm(self):
+        u'''有高校的学员'''
+        self.assertEqual(gxlm.ygxlm(),'true','测试通过')
+    def test_ngxlm(self):
+        u'''没高校的学员'''
+        gxlm.openC('http://www.kgc.dev.cn/','13581917424','123456')
+        self.assertEqual(gxlm.ngxlm(),'true','测试通过')
+    def test_kcmc(self):
+        u'''高校看课'''
+        self.assertEqual(gxlm.kcmc(),'true','测试通过')
+class UT5(TestCase):
+    def setUp(self):
+        global article
+        article=Article.Article()
+        article.openC('http://www.kgc.dev.cn/article','13581917424','123456')
+    def tearDown(self):
+        article.close()
+    def test_details(self):
+        u'''文章详情页跳转正确'''
+        self.assertEqual(article.details(),'true','测试通过')
+    def test_Fabulous(self):
+        u'''文章详情页点赞或取消点赞'''
+        self.assertEqual(article.Fabulous(),'true','测试通过')
 if __name__=='__main__':
-    a=UT()
+    a=UT4()
     a.setUp()
-    a.test_sign()
+    a.test_ngxlm()
     a.tearDown()

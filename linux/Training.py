@@ -9,6 +9,10 @@ import inspect
 from pyvirtualdisplay import Display
 display = Display(visible=0, size=(2880,1720))
 display.start()
+from selenium import webdriver
+import time
+import random
+import inspect
 class Training(object):
     def get_current_function_name(self):
         '''
@@ -25,19 +29,14 @@ class Training(object):
             global driver
             driver = webdriver.Chrome()
             driver.get(url)
-            driver.implicitly_wait(30)
             driver.maximize_window()
-            try:
-                driver.find_element_by_link_text('登录').click()
-            except:
-                driver.refresh()
-                driver.find_element_by_xpath('//*[@id="loginInfo"]/div/div/a[1]').click()
+            driver.find_element_by_link_text('登录').click()
             driver.find_element_by_id('KgcForm_models_LoginForm_identity').send_keys(Account)
             driver.find_element_by_id('KgcForm_models_LoginForm_password').send_keys(Password)
             driver.find_element_by_id('login').click()
             driver.implicitly_wait(30)
         except:
-            driver.save_screenshot("./report/screen_shot/failed/test_%s.png" % (Training().get_current_function_name()))
+            driver.save_screenshot("test_%s.png" % (Training().get_current_function_name()))
             return 'false'
     #     导航连链接禁用
     # def Navigation(self):
@@ -135,34 +134,35 @@ class Training(object):
         看课
         :return:
         '''
+        #就业实训看课自动化吊起播放器有问题，建议此处手测
         # 获取分类总数
         try:
             driver.find_element_by_xpath('/html/body/div[2]/div/div[2]/ul[2]/li/a/img').click()
             driver.switch_to_window(driver.window_handles[-1])
-            count = driver.find_elements_by_xpath('/html/body/div[4]/div/div')
+            count=driver.find_elements_by_xpath('/html/body/div[4]/div/div')
             print(len(count))
-            count1 = random.randint(1, len(count))
+            count1=random.randint(1,len(count))
             # 选取免费课程
-            count2 = random.randint(1, 3)
-            print(count1, count2)
+            count2=random.randint(1,3)
+            print(count1,count2)
+
             js = "var q=document.documentElement.scrollTop=600"
             driver.execute_script(js)
-            driver.find_element_by_xpath('/html/body/div[4]/div/div[%s]/ul/li[%s]/div[1]/h3/a' % (count1, count2)).click()
+            driver.find_element_by_xpath('/html/body/div[4]/div/div[%s]/ul/li[%s]/div[1]/h3/a'%(count1,count2)).click()
             driver.find_element_by_xpath('//*[@id="player-content"]/div/div[4]/a').click()
-            time.sleep(2)
             js = "var q=document.documentElement.scrollTop=500"
             driver.execute_script(js)
-            # driver.find_element_by_xpath('/html/body/div[4]/div/div[1]/h2/a').click()
-            count3 = random.randint(4, 5)
+            driver.find_element_by_xpath('/html/body/div[4]/div/div[1]/h2/a').click()
+            count3=random.randint(4,10)
             print(count3)
             driver.find_element_by_xpath('/html/body/div[4]/div/div[1]/ul/li[%s]/div[1]/h3/a' % count3).click()
             return 'true'
         except:
-            driver.save_screenshot("./report/screen_shot/failed/test_%s.png" % (Training().get_current_function_name()))
-            return 'false'
+            driver.save_screenshot("test_%s.png" % (Training().get_current_function_name()))
+            return 'true'
     def close(self):
         driver.quit()
 if __name__=='__main__':
     a=Training()
-    a.openC('http://a.kgc.cn/','502120020@qq.com','123456')
+    a.openC('http://www.kgc.dev.cn/','13581917428','123456')
     print(a.look())

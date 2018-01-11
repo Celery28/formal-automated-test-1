@@ -9,8 +9,12 @@ import inspect
 from pyvirtualdisplay import Display
 display = Display(visible=0, size=(2880,1720))
 display.start()
+from selenium import webdriver
+import time
+import random
+import inspect
 class shop(object):
-    global driver
+
     def get_current_function_name(self):
         '''
         返回当前方法名
@@ -23,7 +27,7 @@ class shop(object):
         :return:
         '''
         try:
-
+            global driver
             driver = webdriver.Chrome()
             driver.get(url)
             driver.maximize_window()
@@ -33,7 +37,7 @@ class shop(object):
             driver.find_element_by_id('login').click()
             driver.implicitly_wait(30)
         except:
-            driver.save_screenshot("./report/screen_shot/failed/test_%s.png" % (shop().get_current_function_name()))
+            driver.save_screenshot("test_%s.png" % (shop().get_current_function_name()))
             return 'false'
     def Buy(self):
         '''
@@ -41,7 +45,7 @@ class shop(object):
         :return:
         '''
         try:
-        # 总个数
+            # 总个数
             count=driver.find_elements_by_xpath('//*[@id="yw2"]/ul/li')
             print(len(count))
             # 假数
@@ -133,10 +137,10 @@ class shop(object):
             if text2==text1[1:]:
                 return 'true'
             else:
-                driver.save_screenshot("./report/screen_shot/failed/test_%s.png" % (shop().get_current_function_name()))
+                driver.save_screenshot("test_%s.png" % (shop().get_current_function_name()))
                 return 'false1'
         except:
-            driver.save_screenshot("./report/screen_shot/failed/test_%s.png" % (shop().get_current_function_name()))
+            driver.save_screenshot("test_%s.png" % (shop().get_current_function_name()))
             return 'false'
     def close(self):
         driver.quit()

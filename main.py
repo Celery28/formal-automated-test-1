@@ -34,14 +34,14 @@ if __name__ == '__main__':
     """
     课工场网站首页测试用例，dev和test环境可以不用执行
     """
-    # 验证进入课程库界面
-    testsuite.addTest(cases.HomepageTestCase("test_act_courses"))
-    # 验证进入就业实训界面
-    testsuite.addTest(cases.HomepageTestCase("test_act_employment_base"))
-    # 验证进入岗位课界面
-    testsuite.addTest(cases.HomepageTestCase("test_act_job"))
-    # 验证进入金牌讲师界面
-    testsuite.addTest(cases.HomepageTestCase("test_act_teachers"))
+    # # 验证进入课程库界面
+    # testsuite.addTest(cases.HomepageTestCase("test_act_courses"))
+    # # 验证进入就业实训界面
+    # testsuite.addTest(cases.HomepageTestCase("test_act_employment_base"))
+    # # 验证进入岗位课界面
+    # testsuite.addTest(cases.HomepageTestCase("test_act_job"))
+    # # 验证进入金牌讲师界面
+    # testsuite.addTest(cases.HomepageTestCase("test_act_teachers"))
 
     """
     课程库列表页测试用例
