@@ -60,7 +60,12 @@ class Search(Page):
         从帖子列表随机选择帖子
         :return:
         """
-        pass
+        posts_list = self.driver.find_elements_by_css_selector("ul.open-sec2-list")
+        if len(posts_list) == 0:
+            raise exceptions.NoSuchElementException("当前搜索结果下没有相关帖子")
+        post = posts_list[random.randint(0, len(posts_list) - 1)]
+
+        return post
 
     def get_post_plate(self):
         """
@@ -95,7 +100,9 @@ class Search(Page):
         :return:
         """
         teacher = self.get_random_teacher_for_teachers()
-        teacher_courses = teacher.find_elements_by_css_selector("dl.teacher-course dt")
+        teacher_courses = teacher.find_elements_by_css_selector("dt.teacher-course-item a")
+
+        return teacher_courses
 
     def get_name_and_img_for_teacher(self):
         """
