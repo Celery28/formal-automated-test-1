@@ -14,6 +14,20 @@ class Search(Page):
 
     search_content = ['java', '测试']
 
+    def get_search_course_is_not_null(self):
+        """
+        判断搜索课程是否为空
+        :return:
+        """
+        try:
+            search_empty = self.driver.find_element_by_css_selector("div.search-empty")
+             if search_empty is True:
+                 return False
+        except:
+
+
+
+
     def get_random_flip_pages(self):
         """
         随机翻页
