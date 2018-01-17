@@ -16,11 +16,13 @@ class SearchTestCase(TestCase):
 
     def setUp(self):
         """将关闭浏览器标签的标志设置为False"""
+
         self.close_browser_current_tab_on_tear_down = False
 
     @decorators.TestCaseDecorators.screen_shot_in_except("搜索失败")
     def test_search_course(self):
         """搜索课程"""
+
         self.search.get_search_content()
 
         self.search.driver.find_element_by_xpath(self.search.course).click()
@@ -29,6 +31,7 @@ class SearchTestCase(TestCase):
     @decorators.TestCaseDecorators.screen_shot_in_except("搜索帖子失败")
     def test_search_post(self):
         """搜素帖子"""
+
         self.search.get_search_content()
 
         self.search.driver.find_element_by_xpath(self.search.post).click()
@@ -37,6 +40,7 @@ class SearchTestCase(TestCase):
     @decorators.TestCaseDecorators.screen_shot_in_except("搜索老师失败")
     def test_search_teacher(self):
         """搜索老师"""
+
         self.search.get_search_content()
 
         self.search.driver.find_element_by_xpath(self.search.teacher).click()
@@ -45,7 +49,22 @@ class SearchTestCase(TestCase):
     @decorators.TestCaseDecorators.screen_shot_in_except("搜索学友失败")
     def test_search_student(self):
         """搜素学友"""
+
         self.search.get_search_content()
 
         self.search.driver.find_element_by_xpath(self.search.user).click()
         self.assertTrue(self.search.is_null_search(), "当前搜索词未搜索出相关学友，测试失败，请重试")
+
+    @decorators.TestCaseDecorators.screen_shot_in_except("搜索课程进入课程详情页失败")
+    def test_search_course_enter_course_details_page(self):
+        """测试搜索课程进入课程详情页"""
+
+        self.search.get_search_content()
+        self.search.driver.find_element_by_xpath(self.search.course).click()
+
+        course_name = self.search.get_course_message(self.search.get_random_course_for_search_courses())
+        course_name_a = course_name.text
+        course_name.click()
+
+        self.assertEqual("{0} - 课工场".format(course_name_a), self.driver.title, "搜索课程进入课程详情页测试失败")
+

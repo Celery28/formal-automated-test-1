@@ -118,22 +118,24 @@ if __name__ == '__main__':
     """
     搜索页面用例
     """
-    # 验证搜索课程是否有数据
-    testsuite.addTest(cases.SearchTestCase("test_search_course"))
-    testsuite.addTest(cases.SearchTestCase("test_search_post"))
-    testsuite.addTest(cases.SearchTestCase("test_search_teacher"))
-    testsuite.addTest(cases.SearchTestCase("test_search_student"))
+    # 验证搜索课程\帖子\老师\学友是否有数据
+    # testsuite.addTest(cases.SearchTestCase("test_search_course"))
+    # testsuite.addTest(cases.SearchTestCase("test_search_post"))
+    # testsuite.addTest(cases.SearchTestCase("test_search_teacher"))
+    # testsuite.addTest(cases.SearchTestCase("test_search_student"))
+    # 验证随机搜索课程随机进入课程详情页功能
+    testsuite.addTest(cases.SearchTestCase("test_search_course_enter_course_details_page"))
 
-    # runner = unittest.TextTestRunner()
-    # runner.run(testsuite)
-
-    report_path = os.path.join(run_path, 'report')
-    now = time.strftime('%Y-%m-%d %H-%M-%S')
-
-    filename = os.path.join(report_path, now + 'report.html')
-    fp = open(filename, 'wb')
-
-    runner = HTMLTestRunner(stream=fp,
-                            title='课程库测试结果',
-                            description='测试报告.')
+    runner = unittest.TextTestRunner()
     runner.run(testsuite)
+
+    # report_path = os.path.join(run_path, 'report')
+    # now = time.strftime('%Y-%m-%d %H-%M-%S')
+    #
+    # filename = os.path.join(report_path, now + 'report.html')
+    # fp = open(filename, 'wb')
+    #
+    # runner = HTMLTestRunner(stream=fp,
+    #                         title='课程库测试结果',
+    #                         description='测试报告.')
+    # runner.run(testsuite)

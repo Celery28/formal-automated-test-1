@@ -54,7 +54,7 @@ class Search(Page):
 
         return page
 
-    def get_random_course_for_courses(self):
+    def get_random_course_for_search_courses(self):
         """
         从课程列表随机选择课程
         :return:
@@ -68,12 +68,23 @@ class Search(Page):
 
         return course
 
+    def get_course_message(self, course):
+        """
+        获取课程相关信息
+        :param course:
+        :return:
+        """
+        # course_img = course.find_element_by_css_selector("a img").get_attribute("src")
+        course_name = course.find_element_by_css_selector("div.search-course-r a")
+
+        return course_name
+
     def get_random_course_label_for_courses(self):
         """
         从课程列表中随机选择课程标签
         :return:
         """
-        course = self.get_random_course_for_courses()
+        course = self.get_random_course_for_search_courses()
         courses_label = course.find_elements_by_css_selector("div.search-c-tag a")
         if courses_label == 0:
             raise exceptions.NoSuchElementException("该课程下没有课程标签")
