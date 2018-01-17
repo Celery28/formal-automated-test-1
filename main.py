@@ -125,6 +125,10 @@ if __name__ == '__main__':
     # testsuite.addTest(cases.SearchTestCase("test_search_student"))
     # 验证随机搜索课程随机进入课程详情页功能
     testsuite.addTest(cases.SearchTestCase("test_search_course_enter_course_details_page"))
+    # 验证随机搜索课程随机进入课程标签页
+    testsuite.addTest(cases.SearchTestCase("test_search_course_enter_label_details_page"))
+    # 验证搜索课程翻页功能
+    testsuite.addTest(cases.SearchTestCase("test_search_course_flip_pages"))
 
     runner = unittest.TextTestRunner()
     runner.run(testsuite)

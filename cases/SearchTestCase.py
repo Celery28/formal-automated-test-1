@@ -68,3 +68,33 @@ class SearchTestCase(TestCase):
 
         self.assertEqual("{0} - 课工场".format(course_name_a), self.driver.title, "搜索课程进入课程详情页测试失败")
 
+    @decorators.TestCaseDecorators.screen_shot_in_except("搜索课程进入标签详情页失败")
+    def test_search_course_enter_label_details_page(self):
+        """测试搜索课程进入标签详情页"""
+
+        self.driver.back()
+
+        self.search.get_search_content()
+        self.search.driver.find_element_by_xpath(self.search.course).click()
+
+        course_label = self.search.get_random_course_label_for_courses()
+        course_label_name = course_label.text
+        course_label.click()
+
+        self.assertEqual("{0} - 标签 - 课工场".format(course_label_name), self.driver.title, "搜索课程进入标签详情页失败")
+
+    @decorators.TestCaseDecorators.screen_shot_in_except("搜索课程翻页功能失败")
+    def test_search_course_flip_pages(self):
+        """测试搜索课程翻页功能"""
+
+        self.driver.back()
+
+        self.search.get_search_content()
+        self.search.driver.find_element_by_xpath(self.search.course).click()
+
+        self.search.get_random_flip_pages().click()
+
+
+
+
+
