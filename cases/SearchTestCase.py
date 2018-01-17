@@ -94,6 +94,55 @@ class SearchTestCase(TestCase):
 
         self.search.get_random_flip_pages().click()
 
+    @decorators.TestCaseDecorators.screen_shot_in_except("搜索帖子随机进入帖子详情页失败")
+    def test_search_post_enter_post_details_page(self):
+        """测试搜索帖子随机进入帖子详情页"""
+
+        self.search.get_search_content()
+        self.search.driver.find_element_by_xpath(self.search.post).click()
+
+        post_content = self.search.get_post_message(self.search.get_random_post_for_posts())[0]
+        post_content_a = post_content.text
+        post_content.click()
+
+        self.assertIn(self.driver.title, post_content_a,  "搜索帖子随机进入帖子详情页失败")
+
+    @decorators.TestCaseDecorators.screen_shot_in_except("搜索帖子随机进入板块详情页失败")
+    def test_search_post_enter_plate_details_page(self):
+        """测试搜索帖子随机进入板块详情页失败"""
+
+        self.driver.back()
+
+        self.search.get_search_content()
+        self.search.driver.find_element_by_xpath(self.search.post).click()
+
+        post_plate = self.search.get_post_message(self.search.get_random_post_for_posts())[1]
+        post_plate_name = post_plate.text
+        post_plate.click()
+
+        self.assertEqual("{0} - 课工场".format(post_plate_name), self.driver.title, "搜索帖子随机进入板块详情页失败")
+
+    @decorators.TestCaseDecorators.screen_shot_in_except("搜索帖子进入个人主页失败")
+    def test_search_post_enter_homepage(self):
+        """测试搜索帖子随机进入个人主页"""
+
+        self.driver.back()
+
+        self.search.get_search_content()
+        self.search.driver.find_element_by_xpath(self.search.post).click()
+
+        homepage, homepage_url = self.search.get_post_message(self.search.get_random_post_for_posts())[2:]
+        homepage.click()
+
+        self.search.act_switch_to_last_window()
+
+        self.assertEqual(homepage_url, self.driver.current_url, "搜索帖子进入个人主页失败")
+
+
+
+
+
+
 
 
 

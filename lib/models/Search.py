@@ -98,19 +98,27 @@ class Search(Page):
         从帖子列表随机选择帖子
         :return:
         """
-        posts_list = self.driver.find_elements_by_css_selector("ul.open-sec2-list")
+        posts_list = self.driver.find_elements_by_css_selector("ul.open-sec2-list li")
         if len(posts_list) == 0:
             raise exceptions.NoSuchElementException("当前搜索结果下没有相关帖子")
         post = posts_list[random.randint(0, len(posts_list) - 1)]
 
         return post
 
-    def get_post_plate(self):
+    def get_post_message(self, post):
         """
-        进入帖子板块
+        获取帖子相关信息
+        :param post:
         :return:
         """
-        pass
+
+        post_content = post.find_element_by_css_selector("div.yui3-u-12-13 h2 a")
+        post_plate = post.find_element_by_css_selector("span.bankuai a")
+        homepage = post.find_element_by_css_selector("div.list-tx-rela a")
+        homepage_url = homepage.get_attribute("href")
+
+        return post_content, post_plate, homepage, homepage_url
+
 
     def get_homepage(self):
         """

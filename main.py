@@ -123,23 +123,29 @@ if __name__ == '__main__':
     # testsuite.addTest(cases.SearchTestCase("test_search_post"))
     # testsuite.addTest(cases.SearchTestCase("test_search_teacher"))
     # testsuite.addTest(cases.SearchTestCase("test_search_student"))
-    # 验证随机搜索课程随机进入课程详情页功能
+    # 验证搜索课程随机进入课程详情页功能
     testsuite.addTest(cases.SearchTestCase("test_search_course_enter_course_details_page"))
     # 验证随机搜索课程随机进入课程标签页
     testsuite.addTest(cases.SearchTestCase("test_search_course_enter_label_details_page"))
     # 验证搜索课程翻页功能
     testsuite.addTest(cases.SearchTestCase("test_search_course_flip_pages"))
+    # 验证搜索帖子随机进入帖子详情页
+    testsuite.addTest(cases.SearchTestCase("test_search_post_enter_post_details_page"))
+    # 验证搜索帖子随机进入板块详情页
+    testsuite.addTest(cases.SearchTestCase("test_search_post_enter_plate_details_page"))
+    # 验证搜索帖子进入个人主页
+    testsuite.addTest(cases.SearchTestCase("test_search_post_enter_homepage"))
 
-    runner = unittest.TextTestRunner()
-    runner.run(testsuite)
-
-    # report_path = os.path.join(run_path, 'report')
-    # now = time.strftime('%Y-%m-%d %H-%M-%S')
-    #
-    # filename = os.path.join(report_path, now + 'report.html')
-    # fp = open(filename, 'wb')
-    #
-    # runner = HTMLTestRunner(stream=fp,
-    #                         title='课程库测试结果',
-    #                         description='测试报告.')
+    # runner = unittest.TextTestRunner()
     # runner.run(testsuite)
+
+    report_path = os.path.join(run_path, 'report')
+    now = time.strftime('%Y-%m-%d %H-%M-%S')
+
+    filename = os.path.join(report_path, now + 'report.html')
+    fp = open(filename, 'wb')
+
+    runner = HTMLTestRunner(stream=fp,
+                            title='课程库测试结果',
+                            description='测试报告.')
+    runner.run(testsuite)
