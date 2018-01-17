@@ -13,20 +13,33 @@ class Search(Page):
     """
 
     search_content = ['java', '测试']
+    course = "/html/body/div[2]/div/h2/div/span[1]"
+    post = "/html/body/div[2]/div/h2/div/span[2]"
+    teacher = "/html/body/div[2]/div/h2/div/span[3]"
+    user = "/html/body/div[2]/div/h2/div/span[4]"
 
-    def get_search_course_is_not_null(self):
+    def get_search_content(self):
+        """
+        输入搜索内容，进行搜索
+        :return:
+        """
+        search_key = self.driver.find_element_by_css_selector("input.search-key")
+        search_key.clear()
+        search_key.send_keys(random.choice(self.search_content))
+        self.driver.find_element_by_css_selector("a.search1-btn").click()
+
+    def is_null_search(self):
         """
         判断搜索课程是否为空
+        如果为空，返回false
+        如果不为空，返回true
         :return:
         """
         try:
-            search_empty = self.driver.find_element_by_css_selector("div.search-empty")
-             if search_empty is True:
-                 return False
-        except:
-
-
-
+            self.driver.find_element_by_css_selector("div.search-empty")
+            return False
+        except exceptions.NoSuchElementException:
+            return True
 
     def get_random_flip_pages(self):
         """

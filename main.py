@@ -98,22 +98,31 @@ if __name__ == '__main__':
     """
     教师列表页测试用例
     """
-    # 验证随机筛选教师方向
-    testsuite.addTest(cases.TeachersTestCase("test_teachers_category"))
-    # 随机进入教师详情页
-    testsuite.addTest(cases.TeachersTestCase("test_teachers_page"))
+    # # 验证随机筛选教师方向
+    # testsuite.addTest(cases.TeachersTestCase("test_teachers_category"))
+    # # 随机进入教师详情页
+    # testsuite.addTest(cases.TeachersTestCase("test_teachers_page"))
 
     """
     教师详情页测试用例
     """
-    # 验证教师详情页关注功能
-    testsuite.addTest(cases.TeacherTestCase("test_teacher_details_favorite"))
-    # 验证教师点赞功能
-    testsuite.addTest(cases.TeacherTestCase("test_teacher_zan"))
-    # 验证随机进入同方向讲师
-    testsuite.addTest(cases.TeacherTestCase("test_same_direction_teacher"))
-    # 验证随机进入金牌讲师页面
-    testsuite.addTest(cases.TeacherTestCase("test_gold_medal_teacher"))
+    # # 验证教师详情页关注功能
+    # testsuite.addTest(cases.TeacherTestCase("test_teacher_details_favorite"))
+    # # 验证教师点赞功能
+    # testsuite.addTest(cases.TeacherTestCase("test_teacher_zan"))
+    # # 验证随机进入同方向讲师
+    # testsuite.addTest(cases.TeacherTestCase("test_same_direction_teacher"))
+    # # 验证随机进入金牌讲师页面
+    # testsuite.addTest(cases.TeacherTestCase("test_gold_medal_teacher"))
+
+    """
+    搜索页面用例
+    """
+    # 验证搜索课程是否有数据
+    testsuite.addTest(cases.SearchTestCase("test_search_course"))
+    testsuite.addTest(cases.SearchTestCase("test_search_post"))
+    testsuite.addTest(cases.SearchTestCase("test_search_teacher"))
+    testsuite.addTest(cases.SearchTestCase("test_search_student"))
 
     runner = unittest.TextTestRunner()
     runner.run(testsuite)
