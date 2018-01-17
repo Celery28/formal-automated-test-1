@@ -119,16 +119,16 @@ if __name__ == '__main__':
     搜索页面用例
     """
     # 验证搜索课程\帖子\老师\学友是否有数据
-    # testsuite.addTest(cases.SearchTestCase("test_search_course"))
-    # testsuite.addTest(cases.SearchTestCase("test_search_post"))
-    # testsuite.addTest(cases.SearchTestCase("test_search_teacher"))
-    # testsuite.addTest(cases.SearchTestCase("test_search_student"))
+    testsuite.addTest(cases.SearchTestCase("test_search_course"))
+    testsuite.addTest(cases.SearchTestCase("test_search_post"))
+    testsuite.addTest(cases.SearchTestCase("test_search_teacher"))
+    testsuite.addTest(cases.SearchTestCase("test_search_student"))
     # 验证搜索课程随机进入课程详情页功能
     testsuite.addTest(cases.SearchTestCase("test_search_course_enter_course_details_page"))
     # 验证随机搜索课程随机进入课程标签页
     testsuite.addTest(cases.SearchTestCase("test_search_course_enter_label_details_page"))
     # 验证搜索课程翻页功能
-    testsuite.addTest(cases.SearchTestCase("test_search_course_flip_pages"))
+    # testsuite.addTest(cases.SearchTestCase("test_search_course_flip_pages"))
     # 验证搜索帖子随机进入帖子详情页
     testsuite.addTest(cases.SearchTestCase("test_search_post_enter_post_details_page"))
     # 验证搜索帖子随机进入板块详情页
