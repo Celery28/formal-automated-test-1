@@ -98,6 +98,8 @@ class SearchTestCase(TestCase):
     def test_search_post_enter_post_details_page(self):
         """测试搜索帖子随机进入帖子详情页"""
 
+        self.driver.back()
+
         self.search.get_search_content()
         self.search.driver.find_element_by_xpath(self.search.post).click()
 
