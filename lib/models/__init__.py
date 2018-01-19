@@ -8,3 +8,4 @@ from .Teachers import Teachers
 from .Teacher import Teacher
 from .Homepage import Homepage
 from .Search import Search
+from .SeriesCourse import SeriesCourse
