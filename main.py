@@ -135,6 +135,12 @@ if __name__ == '__main__':
     testsuite.addTest(cases.SearchTestCase("test_search_post_enter_plate_details_page"))
     # 验证搜索帖子进入个人主页
     testsuite.addTest(cases.SearchTestCase("test_search_post_enter_homepage"))
+    # 验证搜索教师随机进入教师主页
+    testsuite.addTest(cases.SearchTestCase("test_search_teacher_enter_teacher_homepage"))
+    # 验证搜索学友随机进入个人主页
+    testsuite.addTest(cases.SearchTestCase("test_search_user_enter_homepage"))
+    # 验证搜索学友随机加关注按钮
+    # testsuite.addTest(cases.SearchTestCase(""))
 
     # runner = unittest.TextTestRunner()
     # runner.run(testsuite)

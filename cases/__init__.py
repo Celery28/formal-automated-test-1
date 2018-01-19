@@ -5,3 +5,4 @@ from .TeachersTestCase import TeachersTestCase
 from .TeacherTestCase import TeacherTestCase
 from .HomepageTestCase import HomepageTestCase
 from .SearchTestCase import SearchTestCase
+from .SeriesCourseTestCase import SeriesCourseTestCase

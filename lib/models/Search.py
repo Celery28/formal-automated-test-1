@@ -30,7 +30,7 @@ class Search(Page):
 
     def is_null_search(self):
         """
-        判断搜索课程是否为空
+        判断搜索是否为空
         如果为空，返回false
         如果不为空，返回true
         :return:
@@ -119,14 +119,6 @@ class Search(Page):
 
         return post_content, post_plate, homepage, homepage_url
 
-
-    def get_homepage(self):
-        """
-        进入个人主页
-        :return:
-        """
-        pass
-
     def get_random_teacher_for_teachers(self):
         """
         从教师列表页随机选择教师
@@ -139,6 +131,19 @@ class Search(Page):
         teacher = teachers[random.randint(0, len(teachers) - 1)]
 
         return teacher
+
+    def get_teacher_message(self, teacher):
+        """
+        获取教师的相关信息
+        :param teacher:
+        :return:
+        """
+
+        teacher_img = teacher.find_element_by_css_selector("div.teacher-tx a")
+        teacher_img_url = teacher_img.get_attribute("href")
+        teacher_name = teacher.find_element_by_css_selector("div.teacher-info span.f18")
+
+        return teacher_img, teacher_img_url, teacher_name
 
     def get_random_course_for_teacher(self):
         """
@@ -175,6 +180,18 @@ class Search(Page):
         student = students[random.randint(0, len(students) - 1)]
 
         return student
+
+    def get_student_message(self, student):
+        """
+        获取学生的相关信息
+        :param student:
+        :return:
+        """
+        user_img = student.find_element_by_css_selector("div.uc-fan-l a")
+        user_img_url = user_img.get_attribute("href")
+        user_name = student.find_element_by_css_selector("p.uc-fan-r-top span")
+
+        return user_img, user_img_url, user_name
 
     def act_click_random_attention_for_student(self):
         """

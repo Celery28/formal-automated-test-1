@@ -107,7 +107,7 @@ class SearchTestCase(TestCase):
         post_content_a = post_content.text
         post_content.click()
 
-        self.assertIn(self.driver.title, post_content_a,  "搜索帖子随机进入帖子详情页失败")
+        self.assertIn(post_content_a, self.driver.title,  "搜索帖子随机进入帖子详情页失败")
 
     @decorators.TestCaseDecorators.screen_shot_in_except("搜索帖子随机进入板块详情页失败")
     def test_search_post_enter_plate_details_page(self):
@@ -139,6 +139,50 @@ class SearchTestCase(TestCase):
         self.search.act_switch_to_last_window()
 
         self.assertEqual(homepage_url, self.driver.current_url, "搜索帖子进入个人主页失败")
+
+    @decorators.TestCaseDecorators.screen_shot_in_except("搜索教师随机进入教师主页失败")
+    def test_search_teacher_enter_teacher_homepage(self):
+        """测试搜索教师进入教师主页"""
+
+        self.driver.switch_to.window(self.driver.window_handles[0])
+
+        self.search.get_search_content()
+        self.search.driver.find_element_by_xpath(self.search.teacher).click()
+
+        teacher_message = self.search.get_teacher_message(self.search.get_random_teacher_for_teachers())
+
+        teacher_name = teacher_message[2].text
+        teacher_message[0].click()
+
+        self.assertEqual("{0} - 讲师 - 课工场".format(teacher_name), self.driver.title, "搜索教师随机进入教师主页失败")
+
+    @decorators.TestCaseDecorators.screen_shot_in_except("搜索学友随机进入个人主页失败")
+    def test_search_user_enter_homepage(self):
+        """测试搜索学友随机进入个人主页"""
+
+        self.driver.back()
+
+        self.search.get_search_content()
+        self.search.driver.find_element_by_xpath(self.search.user).click()
+
+        student_message = self.search.get_student_message(self.search.get_random_student_for_students())
+
+        user_name = student_message[2].text
+        student_message[0].click()
+
+        self.search.act_switch_to_last_window()
+
+        self.assertEqual("{0}参加的课程 - 课工场".format(user_name), self.driver.title, "搜索学友随机进入个人主页失败")
+
+
+
+
+
+
+
+
+
+
 
 
 
