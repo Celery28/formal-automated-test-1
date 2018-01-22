@@ -1,5 +1,5 @@
 from lib.models import Page
-
+import random
 from selenium.common import exceptions
 
 
@@ -54,3 +54,46 @@ class PostCourse(Page):
             raise exceptions.NoSuchElementException("该岗位课没有下一课")
         else:
             next_course.click()
+
+    def get_random_post_courses_course_chapters(self):
+        """
+        随机获取某个课程章节
+        :return:
+        """
+
+        course_chapters = self.driver.find_elements_by_css_selector("ul.common-learn-line li")
+        if len(course_chapters) == 0:
+            raise exceptions.NoSuchElementException("该岗位课下没有章节，请联系业务老师进行处理")
+        course_chapter = course_chapters[random.randint(0, len(course_chapters) - 1)].click()
+
+        return course_chapter
+
+    def get_random_post_courses_course_details_page(self, course_chapter):
+        """
+        从岗位课中随机获取某个课程
+        :return:
+        """
+
+        courses = course_chapter.find_elements_by_css_selector("dl.list-course-box dt")
+        if len(courses) == 0:
+            raise exceptions.NoSuchElementException("该章节下没有课程，请联系业务老师进行处理")
+        course = courses[random.randint(0, len(courses) - 1)]
+
+        return course
+
+    def get_course_message(self, course):
+        """
+        获取随机获取的课程信息
+        :return:
+        """
+
+        course_name = course.find_element_by_css_selector("a.course-name")
+        course_know = course.find_element_by_css_selector("a.know-course")
+        course_url = course_know.get_attribute("href")
+
+        return course_name, course_know, course_url
+
+
+
+
+

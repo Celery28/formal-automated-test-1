@@ -1,6 +1,7 @@
 from lib import models
 from lib.unittest_ import TestCase
 from lib.common import decorators
+import re, time
 
 
 class PostCourseTestCase(TestCase):
@@ -22,11 +23,58 @@ class PostCourseTestCase(TestCase):
     
         :return:
         """
+        pass
+        # course = self.post_courses.act_click_random_post_course()
+        #
+        # if course.has_next_course() is False:
+        #     pass
+        #
+        # course.act_click_next_course()
+        # self.assertIn('', '', '')
 
-        course = self.post_courses.act_click_random_post_course()
+    @decorators.TestCaseDecorators.screen_shot_in_except("岗位课中随机进入课程详情页失败")
+    def test_course_details_page(self):
+        """
+        测试岗位课中随机进入课程详情页
+        :return:
+        """
 
-        if course.has_next_course() is False:
-            pass
+        self.post_courses.act_click_random_post_course()
 
-        course.act_click_next_course()
-        self.assertIn('', '', '')
+        post_course = models.PostCourse(self.driver)
+
+        # 进入章节
+        # course_chapter = post_course.get_random_post_courses_course_chapters()
+        # # course_chapter.click()
+        # time.sleep(5)
+
+        course_message = post_course.get_course_message(post_course.get_random_post_courses_course_details_page(
+            post_course.get_random_post_courses_course_chapters()))
+
+        course_url = course_message[2]
+        course_url = re.sub("\D", "", course_url)
+
+        # 进入课程详情页
+        course_message[1].click()
+        time.sleep(5)
+
+        self.post_courses.act_switch_to_last_window()
+
+        course_url_new = self.post_courses.get_current_page_url()
+        course_url_new = re.sub("\D", "", course_url_new)
+
+        self.assertEqual(course_url, course_url_new, "岗位课中随机进入课程详情页失败")
+
+
+
+
+
+
+
+
+
+
+
+
+
+

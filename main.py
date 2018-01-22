@@ -92,8 +92,13 @@ if __name__ == '__main__':
     """
     # # 证进入岗位课详情页
     # testsuite.addTest(cases.PostCoursesTestCase("test_post_course"))
-    # # 验证进入下一课
-    # # testsuite.addTest(cases.PostCoursesTestCase("test_next_course"))
+
+    """
+    岗位课详情页测试用例
+    """
+    # TODO: 这个用例有些问题，需要优化
+    # 测试岗位课中随机进入课程详情页
+    testsuite.addTest(cases.PostCourseTestCase("test_course_details_page"))
 
     """
     教师列表页测试用例
@@ -118,40 +123,49 @@ if __name__ == '__main__':
     """
     搜索页面用例
     """
-    # 验证搜索课程\帖子\老师\学友是否有数据
-    testsuite.addTest(cases.SearchTestCase("test_search_course"))
-    testsuite.addTest(cases.SearchTestCase("test_search_post"))
-    testsuite.addTest(cases.SearchTestCase("test_search_teacher"))
-    testsuite.addTest(cases.SearchTestCase("test_search_student"))
-    # 验证搜索课程随机进入课程详情页功能
-    testsuite.addTest(cases.SearchTestCase("test_search_course_enter_course_details_page"))
-    # 验证随机搜索课程随机进入课程标签页
-    testsuite.addTest(cases.SearchTestCase("test_search_course_enter_label_details_page"))
-    # 验证搜索课程翻页功能
-    # testsuite.addTest(cases.SearchTestCase("test_search_course_flip_pages"))
-    # 验证搜索帖子随机进入帖子详情页
-    testsuite.addTest(cases.SearchTestCase("test_search_post_enter_post_details_page"))
-    # 验证搜索帖子随机进入板块详情页
-    testsuite.addTest(cases.SearchTestCase("test_search_post_enter_plate_details_page"))
-    # 验证搜索帖子进入个人主页
-    testsuite.addTest(cases.SearchTestCase("test_search_post_enter_homepage"))
-    # 验证搜索教师随机进入教师主页
-    testsuite.addTest(cases.SearchTestCase("test_search_teacher_enter_teacher_homepage"))
-    # 验证搜索学友随机进入个人主页
-    testsuite.addTest(cases.SearchTestCase("test_search_user_enter_homepage"))
+    # # 验证搜索课程\帖子\老师\学友是否有数据
+    # testsuite.addTest(cases.SearchTestCase("test_search_course"))
+    # testsuite.addTest(cases.SearchTestCase("test_search_post"))
+    # testsuite.addTest(cases.SearchTestCase("test_search_teacher"))
+    # testsuite.addTest(cases.SearchTestCase("test_search_student"))
+    # # 验证搜索课程随机进入课程详情页功能
+    # testsuite.addTest(cases.SearchTestCase("test_search_course_enter_course_details_page"))
+    # # 验证随机搜索课程随机进入课程标签页
+    # testsuite.addTest(cases.SearchTestCase("test_search_course_enter_label_details_page"))
+    # TODO: 这个用例有些问题，需要优化
+    # # 验证搜索课程翻页功能
+    # # testsuite.addTest(cases.SearchTestCase("test_search_course_flip_pages"))
+    # # 验证搜索帖子随机进入帖子详情页
+    # testsuite.addTest(cases.SearchTestCase("test_search_post_enter_post_details_page"))
+    # # 验证搜索帖子随机进入板块详情页
+    # testsuite.addTest(cases.SearchTestCase("test_search_post_enter_plate_details_page"))
+    # # 验证搜索帖子进入个人主页
+    # testsuite.addTest(cases.SearchTestCase("test_search_post_enter_homepage"))
+    # # 验证搜索教师随机进入教师主页
+    # testsuite.addTest(cases.SearchTestCase("test_search_teacher_enter_teacher_homepage"))
+    # # 验证搜索学友随机进入个人主页
+    # testsuite.addTest(cases.SearchTestCase("test_search_user_enter_homepage"))
     # 验证搜索学友随机加关注按钮
     # testsuite.addTest(cases.SearchTestCase(""))
 
-    # runner = unittest.TextTestRunner()
-    # runner.run(testsuite)
+    """
+    系列课页面用例
+    """
+    # # 测试系列课程数量
+    # testsuite.addTest(cases.SeriesCourseTestCase("test_series_course_number"))
+    # # 测试系列课随机进入某节课程
+    # testsuite.addTest(cases.SeriesCourseTestCase("test_series_course"))
 
-    report_path = os.path.join(run_path, 'report')
-    now = time.strftime('%Y-%m-%d %H-%M-%S')
-
-    filename = os.path.join(report_path, now + 'report.html')
-    fp = open(filename, 'wb')
-
-    runner = HTMLTestRunner(stream=fp,
-                            title='课程库测试结果',
-                            description='测试报告.')
+    runner = unittest.TextTestRunner()
     runner.run(testsuite)
+
+    # report_path = os.path.join(run_path, 'report')
+    # now = time.strftime('%Y-%m-%d %H-%M-%S')
+    #
+    # filename = os.path.join(report_path, now + 'report.html')
+    # fp = open(filename, 'wb')
+    #
+    # runner = HTMLTestRunner(stream=fp,
+    #                         title='课程库测试结果',
+    #                         description='测试报告.')
+    # runner.run(testsuite)
