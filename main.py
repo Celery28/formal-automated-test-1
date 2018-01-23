@@ -146,7 +146,7 @@ if __name__ == '__main__':
     # 验证搜索学友随机进入个人主页
     testsuite.addTest(cases.SearchTestCase("test_search_user_enter_homepage"))
     # 验证搜索学友随机加关注按钮
-    testsuite.addTest(cases.SearchTestCase(""))
+    # testsuite.addTest(cases.SearchTestCase(""))
 
     """
     系列课页面用例
