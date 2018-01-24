@@ -1,5 +1,5 @@
 from lib.models import Page
-import random
+import random, time
 from selenium.common import exceptions
 
 
@@ -96,7 +96,7 @@ class PersonalCenter(Page):
         job_course_name = job_course.find_element_by_css_selector("a.courseTitle")
         learning_status = job_course.find_element_by_css_selector("a.btn_study")
         finished_percentage = job_course.find_element_by_css_selector("div.courseInfo div.coursePro")
-        course_note = job_course.find_element_by_css_selector("ul.courseNote li")
+        course_note = job_course.find_elements_by_css_selector("ul.courseNote li")
         notes = course_note[0]
         questions_and_answer = course_note[1]
         comment = course_note[2]
@@ -132,6 +132,45 @@ class PersonalCenter(Page):
                 break
             else:
                 learning_status = self.get_messages_for_job_course(self.get_random_select_job_course())[2].text
+
+    def get_random_select_job_course_note(self):
+        """
+        随机选择课程笔记
+        :return:
+        """
+
+        notes = self.driver.find_elements_by_css_selector("ul.all-note li")
+        if len(notes) == 0:
+            raise exceptions.NoSuchElementException("该就业课下没有笔记")
+        note = notes[random.randint(0, len(notes) - 1)]
+
+        return note
+
+    def get_note_content(self, note):
+        """
+        获取笔记内容
+        :return:
+        """
+
+        note_content = note.find_element_by_css_selector("div.note-text")
+
+        return note_content
+
+    def act_job_course_note_edit(self, note):
+        """
+        修改就业课课程笔记
+        :return:
+        """
+        note.find_element_by_css_selector("a.note-edit").click()
+
+        input_box = self.driver.find_element_by_css_selector("textarea.p-note-area")
+        input_box.clear()
+        input_box.send_keys("修改笔记内容")
+
+        time.sleep(3)
+        # self.driver.find_element_by_link_text("提交").click()
+
+        self.driver.find_element_by_css_selector("button.note-save").click()
 
     """
     我的课程页面元素动作
