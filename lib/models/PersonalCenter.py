@@ -51,9 +51,31 @@ class PersonalCenter(Page):
         if len(learning_status) == 0:
             raise exceptions.NoSuchElementException("该账号下没有学习状态为正在学习的就业课")
         learning_study = learning_status[random.randint(0, len(learning_status) - 1)]
-        course_name = learning_study.get_attribute("data-name")
 
-        return learning_study, course_name
+        return learning_study
+
+    def get_random_select_job_course_is_expired_status(self):
+        """
+        随机选择就业课的学习状态=“课程已过期”的就业课
+        :return:
+        """
+        expired_status = self.driver.find_elements_by_link_text("课程已过期")
+        if len(expired_status) == 0:
+            raise exceptions.NoSuchElementException("该账号下没有学习状态为课程已过期的就业课")
+        job_courses_expired = expired_status[random.randint(0, len(expired_status) - 1)]
+
+        return job_courses_expired
+
+    def get_expired_status_tips(self):
+        """
+        已过期状态的就业课，温馨提示处理
+        :return:
+        """
+
+        tips_language = self.driver.find_element_by_css_selector("div.recoverTip1 p")
+        tips_yes = self.driver.find_element_by_css_selector("div.recoverTip1 a.yes")
+
+        return tips_language, tips_yes
 
     def get_messages_for_job_course(self, job_course):
         """
