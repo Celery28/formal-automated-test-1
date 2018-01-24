@@ -47,7 +47,13 @@ class PersonalCenter(Page):
         随机选择就业课的学习状态=“开始学习”的就业课
         :return:
         """
-        pass
+        learning_status = self.driver.find_elements_by_link_text("开始学习")
+        if len(learning_status) == 0:
+            raise exceptions.NoSuchElementException("该账号下没有学习状态为正在学习的就业课")
+        learning_study = learning_status[random.randint(0, len(learning_status) - 1)]
+        course_name = learning_study.get_attribute("data-name")
+
+        return learning_study, course_name
 
     def get_messages_for_job_course(self, job_course):
         """
