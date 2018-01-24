@@ -42,6 +42,13 @@ class PersonalCenter(Page):
 
         return job_course
 
+    def get_random_select_job_course_is_learning_status(self):
+        """
+        随机选择就业课的学习状态=“开始学习”的就业课
+        :return:
+        """
+        pass
+
     def get_messages_for_job_course(self, job_course):
         """
         获取就业课的课程信息
@@ -97,8 +104,6 @@ class PersonalCenter(Page):
                 break
             else:
                 learning_status = self.get_messages_for_job_course(self.get_random_select_job_course())[2].text
-
-
 
     """
     我的课程页面元素动作

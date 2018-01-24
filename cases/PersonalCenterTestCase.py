@@ -19,3 +19,8 @@ class PersonalCenterTestCase(TestCase):
     def setUp(self):
         """将关闭浏览器标签的标志设置为False"""
         self.close_browser_current_tab_on_tear_down = False
+
+    @decorators.TestCaseDecorators.screen_shot_in_except("就业课随机点击开始学习失败")
+    def test_learning_status(self):
+        """测试就业课随机点击开始学习，进入播放课程列表"""
+        pass
