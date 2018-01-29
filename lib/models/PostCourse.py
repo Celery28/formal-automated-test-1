@@ -64,9 +64,21 @@ class PostCourse(Page):
         course_chapters = self.driver.find_elements_by_css_selector("ul.common-learn-line li")
         if len(course_chapters) == 0:
             raise exceptions.NoSuchElementException("该岗位课下没有章节，请联系业务老师进行处理")
-        course_chapter = course_chapters[random.randint(0, len(course_chapters) - 1)].click()
 
-        return course_chapter
+        chapter = course_chapters[random.randint(0, len(course_chapters) - 1)]
+        button = chapter.find_element_by_css_selector("i.head-tb")
+        if -1 == button.get_attribute('class').find('learn-show'):
+            button.click()
+
+        return chapter
+
+    def get_chapter_title(self, chapter):
+        """
+        获取章节标题
+        :param chapter:
+        :return:
+        """
+        return chapter.find_element_by_css_selector("strong.h2").text
 
     def get_random_post_courses_course_details_page(self, course_chapter):
         """
@@ -88,10 +100,21 @@ class PostCourse(Page):
         """
 
         course_name = course.find_element_by_css_selector("a.course-name")
-        course_know = course.find_element_by_css_selector("a.know-course")
-        course_url = course_know.get_attribute("href")
+        course_know = course.find_element_by_css_selector("a.know-course").get_attribute("href")
 
-        return course_name, course_know, course_url
+        return course_name, course_know
+
+    def act_click_course(self, course):
+        """
+        点击课程进入课程详情页
+        :param course:
+        :return:
+        """
+        course_name = course.find_element_by_css_selector("a.course-name")
+        self.action_chains.move_to_element(course_name).perform()
+        course.find_element_by_css_selector("a.know-course").click()
+
+        return True
 
 
 

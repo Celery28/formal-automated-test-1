@@ -39,24 +39,22 @@ class PostCourseTestCase(TestCase):
         :return:
         """
 
+        # 随机选择岗位课
         self.post_courses.act_click_random_post_course()
 
         post_course = models.PostCourse(self.driver)
 
-        # 进入章节
-        # course_chapter = post_course.get_random_post_courses_course_chapters()
-        # # course_chapter.click()
-        # time.sleep(5)
+        # 随机选择章节并点击
+        course_chapter = post_course.get_random_post_courses_course_chapters()
 
-        course_message = post_course.get_course_message(post_course.get_random_post_courses_course_details_page(
-            post_course.get_random_post_courses_course_chapters()))
+        course = post_course.get_random_post_courses_course_details_page(course_chapter)
+        course_message = post_course.get_course_message(course)
 
-        course_url = course_message[2]
+        course_url = course_message[1]
         course_url = re.sub("\D", "", course_url)
 
         # 进入课程详情页
-        course_message[1].click()
-        time.sleep(5)
+        post_course.act_click_course(course)
 
         self.post_courses.act_switch_to_last_window()
 
