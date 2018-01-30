@@ -39,7 +39,7 @@ class CourseTestCase(TestCase):
             raise Exception("本次测试没有找到可以购买的免费课程")
 
         course.act_click_buy_button()
-        self.assertTrue(course.is_buy_success(), '应该购买成功')
+        self.assertTrue(course.is_buy_success(), '验证免费课程购买失败')
 
     @decorators.TestCaseDecorators.screen_shot_in_except("验证K币收费课程购买失败")
     def test_no_free_course_buy(self):
@@ -68,7 +68,7 @@ class CourseTestCase(TestCase):
 
         course.act_select_k_coins_pay_method()
         course.act_click_confirm_buy()
-        self.assertTrue(course.is_buy_success(), '应该购买成功')
+        self.assertTrue(course.is_buy_success(), '验证K币收费课程购买失败')
 
     @decorators.TestCaseDecorators.screen_shot_in_except("课程关注验证失败")
     def test_course_favorite(self):
@@ -117,6 +117,8 @@ class CourseTestCase(TestCase):
         tag_name = tag.text
 
         tag.click()
+        self.courses.act_switch_to_last_window()
+
         self.assertEqual("{0} - 标签 - 课工场".format(tag_name), self.driver.title, '验证标签失败')
 
     @decorators.TestCaseDecorators.screen_shot_in_except("教师关注验证失败")

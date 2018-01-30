@@ -1,5 +1,5 @@
 from lib.models import Page
-import random
+import random, time
 from selenium.common import exceptions
 
 
@@ -112,6 +112,7 @@ class PostCourse(Page):
         """
         course_name = course.find_element_by_css_selector("a.course-name")
         self.action_chains.move_to_element(course_name).perform()
+        time.sleep(1)
         course.find_element_by_css_selector("a.know-course").click()
 
         return True
