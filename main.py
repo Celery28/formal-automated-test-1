@@ -51,7 +51,7 @@ if __name__ == '__main__':
     testsuite.addTest(cases.CoursesTestCase("test_sub_category"))
     # 验证课程库列表最新最热、收费免费、课程难度过滤器
     testsuite.addTest(cases.CoursesTestCase("test_courses_sort"))
-    testsuite.addTest((cases.CoursesTestCase("test_courses_price_filter")))
+    testsuite.addTest(cases.CoursesTestCase("test_courses_price_filter"))
     testsuite.addTest(cases.CoursesTestCase("test_course_difficulty_level"))
 
     """
