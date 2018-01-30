@@ -153,16 +153,16 @@ if __name__ == '__main__':
     # # 测试就业课列表，点击课程名称进入就业课详情页
     # testsuite.addTest(cases.PersonalCenterTestCase("test_job_course_details_page"))
 
-    runner = unittest.TextTestRunner()
-    runner.run(testsuite)
-
-    # report_path = os.path.join(run_path, 'report')
-    # now = time.strftime('%Y-%m-%d %H-%M-%S')
-    #
-    # filename = os.path.join(report_path, now + 'report.html')
-    # fp = open(filename, 'wb')
-    #
-    # runner = HTMLTestRunner(stream=fp,
-    #                         title='课程库测试结果',
-    #                         description='测试报告.')
+    # runner = unittest.TextTestRunner()
     # runner.run(testsuite)
+
+    report_path = os.path.join(run_path, 'report')
+    now = time.strftime('%Y-%m-%d %H-%M-%S')
+
+    filename = os.path.join(report_path, now + 'report.html')
+    fp = open(filename, 'wb')
+
+    runner = HTMLTestRunner(stream=fp,
+                            title='课程库测试结果',
+                            description='测试报告.')
+    runner.run(testsuite)
