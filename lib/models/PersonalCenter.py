@@ -172,6 +172,15 @@ class PersonalCenter(Page):
 
         self.driver.find_element_by_css_selector("button.note-save").click()
 
+    def act_job_course_note_del(self, note):
+        """
+        删除就业课笔记
+        :param note:
+        :return:
+        """
+
+        pass
+
     """
     我的课程页面元素动作
     """
