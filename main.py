@@ -36,10 +36,10 @@ if __name__ == '__main__':
     课工场网站首页测试用例，【正式环境已通过，dev和test环境可以不用执行】
     """
     # 验证进入课程库、就业实训、岗位课、金牌讲师界面
-    testsuite.addTest(cases.HomepageTestCase("test_act_courses"))
-    testsuite.addTest(cases.HomepageTestCase("test_act_employment_base"))
-    testsuite.addTest(cases.HomepageTestCase("test_act_job"))
-    testsuite.addTest(cases.HomepageTestCase("test_act_teachers"))
+    # testsuite.addTest(cases.HomepageTestCase("test_act_courses"))
+    # testsuite.addTest(cases.HomepageTestCase("test_act_employment_base"))
+    # testsuite.addTest(cases.HomepageTestCase("test_act_job"))
+    # testsuite.addTest(cases.HomepageTestCase("test_act_teachers"))
 
     """
     课程库列表页测试用例【正式、test、dev环境已通过】
