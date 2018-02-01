@@ -19,9 +19,9 @@ from lib.unittest_.runner import HTMLTestRunner
 run_path = os.path.split(os.path.realpath(__file__))[0]
 opts, args = getopt.getopt(sys.argv[1:], 'e:')
 
-# environment = 'production'
+environment = 'production'
 # environment = 'pre-production'
-environment = 'development'
+# environment = 'development'
 for key, value in opts:
     if '-e' == key:
         environment = value
