@@ -63,16 +63,3 @@ class PostCourseTestCase(TestCase):
 
         self.assertEqual(course_url, course_url_new, "岗位课中随机进入课程详情页失败")
 
-
-
-
-
-
-
-
-
-
-
-
-
-

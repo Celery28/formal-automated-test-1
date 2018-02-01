@@ -1,6 +1,9 @@
-from lib.models import Page
-import random, time
+import random
+import time
+
 from selenium.common import exceptions
+
+from lib.models import Page
 
 
 class PersonalCenter(Page):
@@ -77,33 +80,72 @@ class PersonalCenter(Page):
 
         return tips_language, tips_yes
 
-    def get_messages_for_job_course(self, job_course):
+    def get_job_course_link(self, job_course):
         """
-        获取就业课的课程信息
+        获取就业课链接
         :param job_course:
         :return:
-        job_course_url = 课程url
-        job_course_name = 岗位课名称
-        learning_status = 学习状态【开始学习，已过期】
-        finished_percentage = 完成百分比
-        notes = 笔记
-        questions_and_answer = 问答
-        comment = 评论
-        course_validity = 课程有效期
         """
+        return job_course.find_element_by_css_selector("a.courseImg").get_attribute("href")
 
-        job_course_url = job_course.find_element_by_css_selector("a.courseImg").get_attribute("href")
-        job_course_name = job_course.find_element_by_css_selector("a.courseTitle")
-        learning_status = job_course.find_element_by_css_selector("a.btn_study")
-        finished_percentage = job_course.find_element_by_css_selector("div.courseInfo div.coursePro")
-        course_note = job_course.find_elements_by_css_selector("ul.courseNote li")
-        notes = course_note[0]
-        questions_and_answer = course_note[1]
-        comment = course_note[2]
-        course_validity = job_course.find_element_by_css_selector("div.courseInfo span")
+    def get_job_course_name(self, job_course):
+        """
+        获取就业课名称
+        :param job_course:
+        :return:
+        """
+        return job_course.find_element_by_css_selector("a.courseTitle")
 
-        return job_course_url, job_course_name, learning_status, finished_percentage, notes, \
-                questions_and_answer, comment, course_validity
+    def get_job_course_status(self, job_course):
+        """
+        获取就业课学习状态
+        :param job_course:
+        :return: 开始学习 or 已过期
+        """
+        return job_course.find_element_by_css_selector("a.btn_study")
+
+    def get_job_course_percentage(self, job_course):
+        """
+        获取就业课学习完成百分比
+        :param job_course:
+        :return:
+        """
+        return job_course.find_element_by_css_selector("div.courseInfo div.coursePro")
+
+    def get_job_course_expired(self, job_course):
+        """
+        获取就业课过期时间
+        :param job_course:
+        :return:
+        """
+        return job_course.find_element_by_css_selector("div.courseInfo span")
+
+    def get_job_course_notes(self, job_course):
+        """
+        获取就业课笔记
+        :param job_course:
+        :return:
+        """
+        time.sleep(3)
+        return job_course.find_elements_by_css_selector("ul.courseNote li a")[0]
+
+    def get_job_course_questions(self, job_course):
+        """
+        获取就业课问答
+        :param job_course:
+        :return:
+        """
+        time.sleep(3)
+        return job_course.find_elements_by_css_selector("ul.courseNote li")[1]
+
+    def get_job_course_comments(self, job_course):
+        """
+        获取就业课评论
+        :param job_course:
+        :return:
+        """
+        time.sleep(3)
+        return job_course.find_elements_by_css_selector("ul.courseNote li")[2]
 
     def get_job_course_tab_page(self):
         """
@@ -126,25 +168,46 @@ class PersonalCenter(Page):
         :return:
         """
 
-        learning_status = self.get_messages_for_job_course(self.get_random_select_job_course())[2].text
+        learning_status = self.get_job_course_status(self.get_random_select_job_course()).text
         while learning_status is True:
             if learning_status == "开始学习":
                 break
             else:
-                learning_status = self.get_messages_for_job_course(self.get_random_select_job_course())[2].text
+                learning_status = self.get_job_course_status(self.get_random_select_job_course()).text
 
-    def get_random_select_job_course_note(self):
+    def get_job_course_all_notes(self):
         """
-        随机选择课程笔记
+        获取所有笔记
         :return:
         """
+        return self.driver.find_elements_by_css_selector("ul.all-note li")
 
-        notes = self.driver.find_elements_by_css_selector("ul.all-note li")
+    def get_select_job_course_note(self, index=None):
+        """
+        随机选择课程笔记
+        :param index:
+        :return:
+        """
+        notes = self.get_job_course_all_notes()
         if len(notes) == 0:
             raise exceptions.NoSuchElementException("该就业课下没有笔记")
-        note = notes[random.randint(0, len(notes) - 1)]
+        note = notes[index if index is not None else random.randint(0, len(notes) - 1)]
 
         return note
+
+    def get_job_course_note_index(self, note):
+        """
+        获取笔记在笔记列表中的索引
+        :param note:
+        :return:
+        """
+        notes = self.get_job_course_all_notes()
+
+        for _note in notes:
+            if note.find_element_by_css_selector('input[name=id]').get_attribute('value') == _note.find_element_by_css_selector('input[name=id]').get_attribute('value'):
+                return notes.index(_note)
+
+        raise exceptions.NoSuchElementException("没有在当前笔记列表找到该笔记")
 
     def get_note_content(self, note):
         """
@@ -167,10 +230,9 @@ class PersonalCenter(Page):
         input_box.clear()
         input_box.send_keys("修改笔记内容")
 
-        time.sleep(3)
-        # self.driver.find_element_by_link_text("提交").click()
-
         self.driver.find_element_by_css_selector("button.note-save").click()
+
+        self.driver.refresh()
 
     def act_job_course_note_del(self, note):
         """
