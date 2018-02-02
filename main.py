@@ -19,18 +19,7 @@ from lib.unittest_.runner import HTMLTestRunner
 run_path = os.path.split(os.path.realpath(__file__))[0]
 opts = dict(getopt.getopt(sys.argv[1:], 'e:')[0])
 
-<<<<<<< HEAD
-environment = 'production'
-# environment = 'pre-production'
-# environment = 'development'
-for key, value in opts:
-    if '-e' == key:
-        environment = value
-
-unittest_.TestCase.set_environment(environment)
-=======
 unittest_.TestCase.set_environment(opts.get('-e', 'development'))  # value of: development production pre-production
->>>>>>> c9f824f417bafb2824b679fdba262d1539ba795f
 
 if __name__ == '__main__':
 
