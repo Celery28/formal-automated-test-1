@@ -57,8 +57,7 @@ class PersonalCenterTestCase(TestCase):
 
         self.driver.refresh()
 
-        job_course_name = self.personal_center.get_messages_for_job_course(
-            self.personal_center.get_random_select_job_course())[1]
+        job_course_name = self.personal_center.get_job_course_name(self.personal_center.get_random_select_job_course())
         a = job_course_name.text
 
         job_course_name.click()
@@ -75,15 +74,12 @@ class PersonalCenterTestCase(TestCase):
         self.driver.refresh()
 
         course = self.personal_center.get_random_select_job_course()
-        time.sleep(1)
-        self.personal_center.get_messages_for_job_course(course)[4].click()
-        time.sleep(1)
-        note = self.personal_center.get_random_select_job_course_note()
-        time.sleep(1)
+        self.personal_center.get_job_course_notes(course).click()
+        note = self.personal_center.get_select_job_course_note()
+        index = self.personal_center.get_job_course_note_index(note)
+
         self.personal_center.act_job_course_note_edit(note)
-        time.sleep(1)
-        note_content = self.personal_center.get_note_content(note)
-        time.sleep(1)
+        note_content = self.personal_center.get_note_content(self.personal_center.get_select_job_course_note(index))
 
         self.assertEqual("修改笔记内容", note_content.text, "就业课修改笔记失败")
 
