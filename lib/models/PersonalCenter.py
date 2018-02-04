@@ -38,12 +38,10 @@ class PersonalCenter(Page):
         随机选择一节就业课
         :return:
         """
-        job_courses = self.driver.find_elements_by_css_selector("ul.list-ul li")
+        job_courses = self.driver.find_elements_by_css_selector("li.courseDetail")
         if len(job_courses) == 0:
             raise exceptions.NoSuchElementException("就业课列表没有找到任何就业课，请检查是否存在问题")
-        job_course = job_courses[random.randint(0, len(job_courses) - 1)]
-
-        return job_course
+        return job_courses[random.randint(0, len(job_courses) - 1)]
 
     def get_random_select_job_course_is_learning_status(self):
         """
@@ -126,8 +124,12 @@ class PersonalCenter(Page):
         :param job_course:
         :return:
         """
-        time.sleep(3)
-        return job_course.find_elements_by_css_selector("ul.courseNote li a")[0]
+        links = job_course.find_elements_by_css_selector("ul.courseNote li a")
+
+        for link in links:
+            if 'note.shtml' in link.get_attribute('href'):
+                return link
+        raise exceptions.NoSuchElementException('没有找到笔记的链接')
 
     def get_job_course_questions(self, job_course):
         """
@@ -135,7 +137,6 @@ class PersonalCenter(Page):
         :param job_course:
         :return:
         """
-        time.sleep(3)
         return job_course.find_elements_by_css_selector("ul.courseNote li")[1]
 
     def get_job_course_comments(self, job_course):
@@ -144,7 +145,6 @@ class PersonalCenter(Page):
         :param job_course:
         :return:
         """
-        time.sleep(3)
         return job_course.find_elements_by_css_selector("ul.courseNote li")[2]
 
     def get_job_course_tab_page(self):
@@ -231,8 +231,6 @@ class PersonalCenter(Page):
         input_box.send_keys("修改笔记内容")
 
         self.driver.find_element_by_css_selector("button.note-save").click()
-
-        self.driver.refresh()
 
     def act_job_course_note_del(self, note):
         """

@@ -1,6 +1,7 @@
 from selenium import webdriver
 from selenium.webdriver.common.action_chains import ActionChains
 from selenium.common import exceptions
+from selenium.webdriver.support import wait
 
 
 class Page:
@@ -121,3 +122,13 @@ class Page:
         :return: 
         """
         self.driver.close()
+
+    def wait(self, until, timeout: int=30, interval: float or int=0.5):
+        """
+        显示的等待页面加载并检查页面元素
+        :param until:
+        :param timeout:
+        :param interval:
+        :return:
+        """
+        return wait.WebDriverWait(self.driver, timeout=timeout, poll_frequency=interval).until(until)
