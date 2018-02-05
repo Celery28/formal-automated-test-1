@@ -138,9 +138,9 @@ if __name__ == '__main__':
     个人中心页面
     """
     # 测试就业课随机点击开始学习，进入播放课程列表
-    # testsuite.addTest(cases.PersonalCenterTestCase("test_job_course_learning_status"))
+    testsuite.addTest(cases.PersonalCenterTestCase("test_job_course_learning_status"))
     # # 测试就业课随机点击已过期状态，弹出正确的提示语
-    # testsuite.addTest(cases.PersonalCenterTestCase("test_job_courses_expired"))
+    testsuite.addTest(cases.PersonalCenterTestCase("test_job_courses_expired"))
     # 测试就业课-修改笔记功能
     # TODO:点击进入笔记的时候出现错误，经常会跳到问答列表
     # testsuite.addTest(cases.PersonalCenterTestCase("test_job_course_modify_notes"))

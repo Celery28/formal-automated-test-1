@@ -81,6 +81,9 @@ class PersonalCenterTestCase(TestCase):
         index = self.personal_center.get_job_course_note_index(note)
 
         self.personal_center.act_job_course_note_edit(note)
+
+        time.sleep(3)
+        self.driver.refresh()
         note_content = self.personal_center.get_note_content(self.personal_center.get_select_job_course_note(index))
 
         self.assertEqual("修改笔记内容", note_content.text, "就业课修改笔记失败")
