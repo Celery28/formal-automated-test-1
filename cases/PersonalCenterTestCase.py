@@ -60,6 +60,8 @@ class PersonalCenterTestCase(TestCase):
         job_course_name = self.personal_center.get_job_course_name(self.personal_center.get_random_select_job_course())
         a = job_course_name.text
 
+        time.sleep(1)
+
         job_course_name.click()
 
         self.personal_center.act_switch_to_last_window()
@@ -82,4 +84,23 @@ class PersonalCenterTestCase(TestCase):
         note_content = self.personal_center.get_note_content(self.personal_center.get_select_job_course_note(index))
 
         self.assertEqual("修改笔记内容", note_content.text, "就业课修改笔记失败")
+
+    @decorators.TestCaseDecorators.screen_shot_in_except("就业课-删除笔记失败")
+    def test_job_course_del_notes(self):
+        """测试就业课-删除笔记功能"""
+
+        self.driver.refresh()
+
+        note = self.personal_center.get_select_job_course_note()
+
+        notes_number_first = len(self.personal_center.get_job_course_all_notes())
+        self.personal_center.act_job_course_note_del(note)
+        notes_number_second = len(self.personal_center.get_job_course_all_notes())
+
+        self.assertEqual(notes_number_first, notes_number_second, "就业课-删除笔记失败")
+
+    @decorators.TestCaseDecorators.screen_shot_in_except("就业课-学习计划-切换产品")
+    def test_job_course_
+
+
 

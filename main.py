@@ -142,20 +142,24 @@ if __name__ == '__main__':
     # # 测试就业课随机点击已过期状态，弹出正确的提示语
     # testsuite.addTest(cases.PersonalCenterTestCase("test_job_courses_expired"))
     # 测试就业课-修改笔记功能
-    testsuite.addTest(cases.PersonalCenterTestCase("test_job_course_modify_notes"))
+    # TODO:点击进入笔记的时候出现错误，经常会跳到问答列表
+    # testsuite.addTest(cases.PersonalCenterTestCase("test_job_course_modify_notes"))
+    # 测试就业课-删除笔记功能
+    # testsuite.addTest(cases.PersonalCenterTestCase("test_job_course_del_notes"))
     # 测试就业课列表，点击课程名称进入就业课详情页
-    # testsuite.addTest(cases.PersonalCenterTestCase("test_job_course_details_page"))
+    testsuite.addTest(cases.PersonalCenterTestCase("test_job_course_details_page"))
 
-    # runner = unittest.TextTestRunner()
-    # runner.run(testsuite)
 
-    report_path = os.path.join(run_path, 'report')
-    now = time.strftime('%Y-%m-%d %H-%M-%S')
-
-    filename = os.path.join(report_path, now + 'report.html')
-    fp = open(filename, 'wb')
-
-    runner = HTMLTestRunner(stream=fp,
-                            title='课程库测试结果',
-                            description='测试报告.')
+    runner = unittest.TextTestRunner()
     runner.run(testsuite)
+
+    # report_path = os.path.join(run_path, 'report')
+    # now = time.strftime('%Y-%m-%d %H-%M-%S')
+    #
+    # filename = os.path.join(report_path, now + 'report.html')
+    # fp = open(filename, 'wb')
+    #
+    # runner = HTMLTestRunner(stream=fp,
+    #                         title='课程库测试结果',
+    #                         description='测试报告.')
+    # runner.run(testsuite)

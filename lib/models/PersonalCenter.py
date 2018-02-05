@@ -22,10 +22,6 @@ class PersonalCenter(Page):
         except exceptions.NoSuchElementException:
             return False
 
-    """
-    就业课页面元素动作
-    """
-
     def act_click_job(self):
         """
         点击进入就业课tab页
@@ -241,7 +237,11 @@ class PersonalCenter(Page):
         :return:
         """
 
-        pass
+        note.find_element_by_css_selector("a.note-del").click()
+
+        del_button = self.driver.find_element_by_css_selector("button.note-save")
+        del_button.click()
+
 
     """
     我的课程页面元素动作
