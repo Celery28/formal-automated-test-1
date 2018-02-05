@@ -1,7 +1,7 @@
 from lib.unittest_ import TestCase
 from lib import models
 from lib.common import decorators
-import time
+import time, re
 
 
 class PersonalCenterTestCase(TestCase):
@@ -55,7 +55,7 @@ class PersonalCenterTestCase(TestCase):
     def test_job_course_details_page(self):
         """测试就业课列表，点击课程名称进入就业课详情页"""
 
-        self.driver.refresh()
+        self.personal_center.act_click_job()
 
         job_course_name = self.personal_center.get_job_course_name(self.personal_center.get_random_select_job_course())
         a = job_course_name.text
@@ -73,7 +73,7 @@ class PersonalCenterTestCase(TestCase):
     def test_job_course_modify_notes(self):
         """测试就业课-修改笔记功能"""
 
-        self.driver.refresh()
+        self.personal_center.act_click_job()
 
         course = self.personal_center.get_random_select_job_course()
         self.personal_center.get_job_course_notes(course).click()
@@ -92,8 +92,10 @@ class PersonalCenterTestCase(TestCase):
     def test_job_course_del_notes(self):
         """测试就业课-删除笔记功能"""
 
-        self.driver.refresh()
+        self.personal_center.act_click_job()
 
+        course = self.personal_center.get_random_select_job_course()
+        self.personal_center.get_job_course_notes(course).click()
         note = self.personal_center.get_select_job_course_note()
 
         notes_number_first = len(self.personal_center.get_job_course_all_notes())
@@ -102,8 +104,57 @@ class PersonalCenterTestCase(TestCase):
 
         self.assertEqual(notes_number_first, notes_number_second, "就业课-删除笔记失败")
 
-    @decorators.TestCaseDecorators.screen_shot_in_except("就业课-学习计划-切换产品")
-    def test_job_course_
+    @decorators.TestCaseDecorators.screen_shot_in_except("就业课-笔记源自哪个课程进行跟踪失败")
+    def test_job_couse_notes_from_which_course(self):
+        """测试就业课-笔记源自哪个课程进行跟踪"""
+
+        self.personal_center.act_click_job()
+
+        course = self.personal_center.get_random_select_job_course()
+        self.personal_center.get_job_course_notes(course).click()
+        note = self.personal_center.get_select_job_course_note()
+
+        couse_notes_from_which_course = self.personal_center.get_job_couse_notes_from_which_course(note)
+
+        name = couse_notes_from_which_course.text
+        couse_notes_from_which_course.click()
+
+        self.assertEqual("{0} - 课工场".format(name), self.driver.title, "就业课-笔记源自哪个课程进行跟踪失败")
+
+    @decorators.TestCaseDecorators.screen_shot_in_except("就业课列表笔记数量和笔记详情页数量对比失败")
+    def test_job_course_notes_number_compare(self):
+        """就业课列表笔记数量和笔记详情页数量对比"""
+
+        self.personal_center.act_click_job()
+
+        course = self.personal_center.get_random_select_job_course()
+        course_notes = self.personal_center.get_job_course_notes(course)
+        course_notes_number = course_notes.text
+        number_1 = re.sub("\D", "", course_notes_number)
+        course_notes.click()
+
+        number_2 = len(self.personal_center.get_job_course_all_notes())
+
+        self.assertEqual(int(number_1), number_2, "就业课列表笔记数量和笔记详情页数量对比失败")
+
+    @decorators.TestCaseDecorators.screen_shot_in_except("就业课列表问答数量和问答详情页数量对比失败")
+    def test_job_course_QA_number_compare(self):
+        """就业课列表问答数量和问答详情页数量对比"""
+
+        self.personal_center.act_click_job()
+        course = self.personal_center.get_random_select_job_course()
+
+
+    @decorators.TestCaseDecorators.screen_shot_in_except("就业课列表评论数量和评论详情页数量对比失败")
+    def test_job_course_review_number_compare(self):
+        """就业课列表评论数量和评论详情页数量对比失败"""
+        pass
+
+
+
+
+
+
 
 
 

@@ -140,7 +140,7 @@ class PersonalCenter(Page):
 
     def get_job_course_tab_page(self):
         """
-        点击进入就业课的tab页面
+        进入就业课的tab页面
         就业课程
         学习计划
         我的自测
@@ -195,7 +195,8 @@ class PersonalCenter(Page):
         notes = self.get_job_course_all_notes()
 
         for _note in notes:
-            if note.find_element_by_css_selector('input[name=id]').get_attribute('value') == _note.find_element_by_css_selector('input[name=id]').get_attribute('value'):
+            if note.find_element_by_css_selector('input[name=id]').get_attribute('value') \
+                    == _note.find_element_by_css_selector('input[name=id]').get_attribute('value'):
                 return notes.index(_note)
 
         raise exceptions.NoSuchElementException("没有在当前笔记列表找到该笔记")
@@ -235,6 +236,14 @@ class PersonalCenter(Page):
         del_button = self.driver.find_element_by_css_selector("button.note-save")
         del_button.click()
 
+    def get_job_couse_notes_from_which_course(self, note):
+        """
+        获取就业课-笔记源自哪个课程
+        :param note:
+        :return:
+        """
+
+        return note.find_element_by_css_selector("a.green")
 
     """
     我的课程页面元素动作
@@ -324,6 +333,6 @@ class PersonalCenter(Page):
         links = job_course.find_elements_by_css_selector("ul.courseNote li a")
 
         for link in links:
-            if text + '.shtml' in link.get_attribute('href'):
+            if "{0}.shtml".format(text) in link.get_attribute("href"):
                 return link
         raise exceptions.NoSuchElementException(exception)
