@@ -175,7 +175,7 @@ class PersonalCenter(Page):
 
     def get_select_job_course_note(self, index=None):
         """
-        随机选择课程笔记
+        随机选择课程笔记\问答\评论
         :param index:
         :return:
         """

@@ -154,17 +154,19 @@ if __name__ == '__main__':
     testsuite.addTest(cases.PersonalCenterTestCase("test_job_course_review_number_compare"))
     # 测试笔记右上方点击进入就业课详情页
     testsuite.addTest(cases.PersonalCenterTestCase("test_job_course_notes_top_right_enter_the_job_course_details_page"))
+    # 测试就业课-问答列表-进入问答详情页
+    testsuite.addTest(cases.PersonalCenterTestCase("test_job_course_QA_enter_QA_details_pages"))
 
-    runner = unittest.TextTestRunner()
-    runner.run(testsuite)
-
-    # report_path = os.path.join(run_path, 'report')
-    # now = time.strftime('%Y-%m-%d %H-%M-%S')
-    #
-    # filename = os.path.join(report_path, now + 'report.html')
-    # fp = open(filename, 'wb')
-    #
-    # runner = HTMLTestRunner(stream=fp,
-    #                         title='课程库测试结果',
-    #                         description='测试报告.')
+    # runner = unittest.TextTestRunner()
     # runner.run(testsuite)
+
+    report_path = os.path.join(run_path, 'report')
+    now = time.strftime('%Y-%m-%d %H-%M-%S')
+
+    filename = os.path.join(report_path, now + 'report.html')
+    fp = open(filename, 'wb')
+
+    runner = HTMLTestRunner(stream=fp,
+                            title='课程库测试结果',
+                            description='测试报告.')
+    runner.run(testsuite)

@@ -189,6 +189,22 @@ class PersonalCenterTestCase(TestCase):
         self.assertEqual("{0} - 岗位课 - 课工场".format(right_course_name_a[1]),
                          self.driver.title, "测试笔记右上方点击进入就业课详情页失败")
 
+    @decorators.TestCaseDecorators.screen_shot_in_except("就业课-问答列表-进入问答详情页失败")
+    def test_job_course_QA_enter_QA_details_pages(self):
+        """测试就业课-问答列表-进入问答详情页"""
+
+        self.personal_center.act_click_job()
+
+        course = self.personal_center.get_random_select_job_course()
+        self.personal_center.get_job_course_questions(course).click()
+
+        QA = self.personal_center.get_select_job_course_note()
+
+
+
+
+
+
 
 
 
