@@ -72,6 +72,14 @@ class Page:
         """
         self.driver.switch_to.window(self.current_handle)
 
+    def refresh(self):
+        """
+        刷新页面.
+
+        :return:
+        """
+        self.driver.refresh()
+
     def act_switch_to_last_window(self):
         """
         切换窗口句柄到最后一个窗口.

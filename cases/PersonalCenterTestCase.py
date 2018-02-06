@@ -7,6 +7,8 @@ import time, re
 class PersonalCenterTestCase(TestCase):
     """
     个人中心页测试用例
+
+    注意，当前用例取消了自动关闭tab页的动作，所有的基于个人中心的页面都需要调用act_switch_self_handle方法
     """
 
     @classmethod
@@ -26,7 +28,9 @@ class PersonalCenterTestCase(TestCase):
     def test_job_course_learning_status(self):
         """测试就业课随机点击开始学习，进入播放课程列表"""
 
-        self.driver.refresh()
+        self.personal_center.act_switch_to_self_handle()
+        self.personal_center.refresh()
+        self.personal_center.act_click_job()
 
         learning_study = self.personal_center.get_random_select_job_course_is_learning_status()
         course_name = learning_study.get_attribute("data-name")
@@ -41,7 +45,9 @@ class PersonalCenterTestCase(TestCase):
     def test_job_courses_expired(self):
         """测试就业课随机点击已过期的状态是否正确"""
 
-        self.driver.refresh()
+        self.personal_center.act_switch_to_self_handle()
+        self.personal_center.refresh()
+        self.personal_center.act_click_job()
 
         job_courses_expired = self.personal_center.get_random_select_job_course_is_expired_status()
         job_courses_expired.click()
@@ -55,12 +61,12 @@ class PersonalCenterTestCase(TestCase):
     def test_job_course_details_page(self):
         """测试就业课列表，点击课程名称进入就业课详情页"""
 
+        self.personal_center.act_switch_to_self_handle()
+        self.personal_center.refresh()
         self.personal_center.act_click_job()
 
         job_course_name = self.personal_center.get_job_course_name(self.personal_center.get_random_select_job_course())
         a = job_course_name.text
-
-        time.sleep(1)
 
         job_course_name.click()
 
@@ -73,6 +79,8 @@ class PersonalCenterTestCase(TestCase):
     def test_job_course_modify_notes(self):
         """测试就业课-修改笔记功能"""
 
+        self.personal_center.act_switch_to_self_handle()
+        self.personal_center.refresh()
         self.personal_center.act_click_job()
 
         course = self.personal_center.get_random_select_job_course()
@@ -92,6 +100,8 @@ class PersonalCenterTestCase(TestCase):
     def test_job_course_del_notes(self):
         """测试就业课-删除笔记功能"""
 
+        self.personal_center.act_switch_to_self_handle()
+        self.personal_center.refresh()
         self.personal_center.act_click_job()
 
         course = self.personal_center.get_random_select_job_course()
@@ -108,6 +118,8 @@ class PersonalCenterTestCase(TestCase):
     def test_job_couse_notes_from_which_course(self):
         """测试就业课-笔记源自哪个课程进行跟踪"""
 
+        self.personal_center.act_switch_to_self_handle()
+        self.personal_center.refresh()
         self.personal_center.act_click_job()
 
         course = self.personal_center.get_random_select_job_course()
@@ -125,6 +137,8 @@ class PersonalCenterTestCase(TestCase):
     def test_job_course_notes_number_compare(self):
         """就业课列表笔记数量和笔记详情页数量对比"""
 
+        self.personal_center.act_switch_to_self_handle()
+        self.personal_center.refresh()
         self.personal_center.act_click_job()
 
         course = self.personal_center.get_random_select_job_course()
@@ -141,7 +155,10 @@ class PersonalCenterTestCase(TestCase):
     def test_job_course_QA_number_compare(self):
         """就业课列表问答数量和问答详情页数量对比"""
 
+        self.personal_center.act_switch_to_self_handle()
+        self.personal_center.refresh()
         self.personal_center.act_click_job()
+
         course = self.personal_center.get_random_select_job_course()
         course_question = self.personal_center.get_job_course_questions(course)
         course_qusetion_number = course_question.text
@@ -157,6 +174,8 @@ class PersonalCenterTestCase(TestCase):
     def test_job_course_review_number_compare(self):
         """就业课列表评论数量和评论详情页数量对比失败"""
 
+        self.personal_center.act_switch_to_self_handle()
+        self.personal_center.refresh()
         self.personal_center.act_click_job()
 
         course = self.personal_center.get_random_select_job_course()
@@ -174,6 +193,8 @@ class PersonalCenterTestCase(TestCase):
     def test_job_course_notes_top_right_enter_the_job_course_details_page(self):
         """测试笔记右上方点击进入就业课详情页"""
 
+        self.personal_center.act_switch_to_self_handle()
+        self.personal_center.refresh()
         self.personal_center.act_click_job()
 
         course = self.personal_center.get_random_select_job_course()
@@ -193,6 +214,8 @@ class PersonalCenterTestCase(TestCase):
     def test_job_course_QA_enter_QA_details_pages(self):
         """测试就业课-问答列表-进入问答详情页"""
 
+        self.personal_center.act_switch_to_self_handle()
+        self.personal_center.refresh()
         self.personal_center.act_click_job()
 
         course = self.personal_center.get_random_select_job_course()
