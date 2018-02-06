@@ -252,6 +252,14 @@ class PersonalCenter(Page):
         """
         return self.driver.find_element_by_css_selector("div.center-note a.right")
 
+    def get_QA_content(self, QA):
+        """
+        获取笔记内容
+        :param QA:
+        :return:
+        """
+        QA_content = QA
+
 
     """
     我的课程页面元素动作
