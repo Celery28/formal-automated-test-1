@@ -166,9 +166,9 @@ class PersonalCenter(Page):
             else:
                 learning_status = self.get_job_course_status(self.get_random_select_job_course()).text
 
-    def get_job_course_all_notes(self):
+    def get_job_course_all_notes_or_QA_or_review(self):
         """
-        获取所有笔记
+        获取所有笔记或问答或评论
         :return:
         """
         return self.driver.find_elements_by_css_selector("ul.all-note li")
@@ -179,7 +179,7 @@ class PersonalCenter(Page):
         :param index:
         :return:
         """
-        notes = self.get_job_course_all_notes()
+        notes = self.get_job_course_all_notes_or_QA_or_review()
         if len(notes) == 0:
             raise exceptions.NoSuchElementException("该就业课下没有笔记")
         note = notes[index if index is not None else random.randint(0, len(notes) - 1)]
@@ -192,7 +192,7 @@ class PersonalCenter(Page):
         :param note:
         :return:
         """
-        notes = self.get_job_course_all_notes()
+        notes = self.get_job_course_all_notes_or_QA_or_review()
 
         for _note in notes:
             if note.find_element_by_css_selector('input[name=id]').get_attribute('value') \
@@ -244,6 +244,14 @@ class PersonalCenter(Page):
         """
 
         return note.find_element_by_css_selector("a.green")
+
+    def get_job_course_notes_top_right_enter_the_job_course_details_page(self):
+        """
+        获取笔记右上方点击进入就业课详情页
+        :return:
+        """
+        return self.driver.find_element_by_css_selector("div.center-note a.right")
+
 
     """
     我的课程页面元素动作

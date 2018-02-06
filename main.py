@@ -137,10 +137,10 @@ if __name__ == '__main__':
     """
     个人中心页面
     """
-    # # 测试就业课列表，点击课程名称进入就业课详情页
-    # testsuite.addTest(cases.PersonalCenterTestCase("test_job_course_details_page"))
+    # 测试就业课列表，点击课程名称进入就业课详情页
+    testsuite.addTest(cases.PersonalCenterTestCase("test_job_course_details_page"))
     # # 测试就业课随机点击开始学习，进入播放课程列表
-    # testsuite.addTest(cases.PersonalCenterTestCase("test_job_course_learning_status"))
+    testsuite.addTest(cases.PersonalCenterTestCase("test_job_course_learning_status"))
     # # # 测试就业课随机点击已过期状态，弹出正确的提示语
     # testsuite.addTest(cases.PersonalCenterTestCase("test_job_courses_expired"))
     # # 测试就业课-修改、删除笔记功能
@@ -152,6 +152,8 @@ if __name__ == '__main__':
     testsuite.addTest(cases.PersonalCenterTestCase("test_job_course_notes_number_compare"))
     testsuite.addTest(cases.PersonalCenterTestCase("test_job_course_QA_number_compare"))
     testsuite.addTest(cases.PersonalCenterTestCase("test_job_course_review_number_compare"))
+    # 测试笔记右上方点击进入就业课详情页
+    testsuite.addTest(cases.PersonalCenterTestCase("test_job_course_notes_top_right_enter_the_job_course_details_page"))
 
     runner = unittest.TextTestRunner()
     runner.run(testsuite)

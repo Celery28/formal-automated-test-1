@@ -98,9 +98,9 @@ class PersonalCenterTestCase(TestCase):
         self.personal_center.get_job_course_notes(course).click()
         note = self.personal_center.get_select_job_course_note()
 
-        notes_number_first = len(self.personal_center.get_job_course_all_notes())
+        notes_number_first = len(self.personal_center.get_job_course_all_notes_or_QA_or_review())
         self.personal_center.act_job_course_note_del(note)
-        notes_number_second = len(self.personal_center.get_job_course_all_notes())
+        notes_number_second = len(self.personal_center.get_job_course_all_notes_or_QA_or_review())
 
         self.assertEqual(notes_number_first, notes_number_second, "就业课-删除笔记失败")
 
@@ -133,7 +133,7 @@ class PersonalCenterTestCase(TestCase):
         number_1 = re.sub("\D", "", course_notes_number)
         course_notes.click()
 
-        number_2 = len(self.personal_center.get_job_course_all_notes())
+        number_2 = len(self.personal_center.get_job_course_all_notes_or_QA_or_review())
 
         self.assertEqual(int(number_1), number_2, "就业课列表笔记数量和笔记详情页数量对比失败")
 
@@ -143,12 +143,53 @@ class PersonalCenterTestCase(TestCase):
 
         self.personal_center.act_click_job()
         course = self.personal_center.get_random_select_job_course()
+        course_question = self.personal_center.get_job_course_questions(course)
+        course_qusetion_number = course_question.text
+        number_1 = re.sub("\D", "", course_qusetion_number)
 
+        course_question.click()
+
+        number_2 = len(self.personal_center.get_job_course_all_notes_or_QA_or_review())
+
+        self.assertEqual(int(number_1), number_2, "就业课列表问答数量和问答详情页数量对比失败")
 
     @decorators.TestCaseDecorators.screen_shot_in_except("就业课列表评论数量和评论详情页数量对比失败")
     def test_job_course_review_number_compare(self):
         """就业课列表评论数量和评论详情页数量对比失败"""
-        pass
+
+        self.personal_center.act_click_job()
+
+        course = self.personal_center.get_random_select_job_course()
+        course_review = self.personal_center.get_job_course_comments(course)
+        course_review_number = course_review.text
+        number_1 = re.sub("\D", "", course_review_number)
+
+        course_review.click()
+
+        number_2 = len(self.personal_center.get_job_course_all_notes_or_QA_or_review())
+
+        self.assertEqual(int(number_1), number_2, "就业课列表评论数量和评论详情页数量对比失败")
+
+    @decorators.TestCaseDecorators.screen_shot_in_except("测试笔记右上方点击进入就业课详情页失败")
+    def test_job_course_notes_top_right_enter_the_job_course_details_page(self):
+        """测试笔记右上方点击进入就业课详情页"""
+
+        self.personal_center.act_click_job()
+
+        course = self.personal_center.get_random_select_job_course()
+        self.personal_center.get_job_course_notes(course).click()
+
+        right_course = self.personal_center.get_job_course_notes_top_right_enter_the_job_course_details_page()
+
+        right_course_name = right_course.text
+        right_course_name_a = re.split("：", right_course_name)
+
+        right_course.click()
+
+        self.assertEqual("{0} - 岗位课 - 课工场".format(right_course_name_a[1]),
+                         self.driver.title, "测试笔记右上方点击进入就业课详情页失败")
+
+
 
 
 
