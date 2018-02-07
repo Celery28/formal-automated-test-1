@@ -220,8 +220,42 @@ class PersonalCenterTestCase(TestCase):
 
         course = self.personal_center.get_random_select_job_course()
         self.personal_center.get_job_course_questions(course).click()
+        time.sleep(3)
 
         QA = self.personal_center.get_select_job_course_note()
+        QA_content = self.personal_center.get_QA_content(QA)
+        QA_content_a = QA_content.text
+        QA_content.click()
+
+        self.personal_center.act_switch_to_last_window()
+
+        self.assertIn(QA_content_a, self.driver.title, "就业课-问答列表-进入问答详情页失败")
+
+    @decorators.TestCaseDecorators.screen_shot_in_except("就业课-问答列表-进入板块界面失败")
+    def test_job_course_QA_plate_details_pages(self):
+        """测试就业课-问答列表-进入板块界面"""
+
+        self.personal_center.act_switch_to_self_handle()
+        self.personal_center.refresh()
+        self.personal_center.act_click_job()
+
+        course = self.personal_center.get_random_select_job_course()
+        self.personal_center.get_job_course_questions(course).click()
+        time.sleep(3)
+
+        QA = self.personal_center.get_select_job_course_note()
+        QA_palte = self.personal_center.get_QA_palte(QA)
+
+        QA_palte_name = QA_palte.text
+        QA_palte.click()
+
+        self.personal_center.act_switch_to_last_window()
+
+        bbs_plate = models.BbsPlate(self.driver)
+        plate_name = bbs_plate.get_plate_name().text
+
+        self.assertEqual(QA_palte_name, "[{0}]".format(plate_name), "就业课-问答列表-进入板块界面失败")
+
 
 
 

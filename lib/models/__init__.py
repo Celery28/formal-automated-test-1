@@ -10,3 +10,6 @@ from .Homepage import Homepage
 from .Search import Search
 from .SeriesCourse import SeriesCourse
 from .PersonalCenter import PersonalCenter
+from .Bbs import Bbs
+from .BbsPlate import BbsPlate
+from .BbsPost import BbsPost

@@ -258,7 +258,17 @@ class PersonalCenter(Page):
         :param QA:
         :return:
         """
-        QA_content = QA
+        return QA.find_element_by_css_selector("a.black")
+
+    def get_QA_palte(self, QA):
+        """
+        获取笔记所属板块
+        :param QA:
+        :return:
+        """
+
+        return QA.find_element_by_css_selector("a.green")
+
 
 
     """
