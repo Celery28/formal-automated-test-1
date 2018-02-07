@@ -137,6 +137,8 @@ class PersonalCenterTestCase(TestCase):
     def test_job_course_notes_number_compare(self):
         """就业课列表笔记数量和笔记详情页数量对比"""
 
+        self.driver.back()
+
         self.personal_center.act_switch_to_self_handle()
         self.personal_center.refresh()
         self.personal_center.act_click_job()
@@ -213,6 +215,8 @@ class PersonalCenterTestCase(TestCase):
     @decorators.TestCaseDecorators.screen_shot_in_except("就业课-问答列表-进入问答详情页失败")
     def test_job_course_QA_enter_QA_details_pages(self):
         """测试就业课-问答列表-进入问答详情页"""
+
+        self.driver.back()
 
         self.personal_center.act_switch_to_self_handle()
         self.personal_center.refresh()
