@@ -42,7 +42,6 @@ if __name__ == '__main__':
 
     if opts.console is True:
         runner = unittest.TextTestRunner()
-        runner.run(suite)
     else:
         report_path = os.path.join(run_path, 'report')
         now = time.strftime('%Y-%m-%d %H-%M-%S')
@@ -51,4 +50,5 @@ if __name__ == '__main__':
         fp = open(filename, 'wb')
 
         runner = HTMLTestRunner(stream=fp, title='课程库测试结果', description='测试报告.')
-        runner.run(suite)
+
+    runner.run(suite)
