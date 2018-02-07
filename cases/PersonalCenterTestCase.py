@@ -163,8 +163,8 @@ class PersonalCenterTestCase(TestCase):
 
         course = self.personal_center.get_random_select_job_course()
         course_question = self.personal_center.get_job_course_questions(course)
-        course_qusetion_number = course_question.text
-        number_1 = re.sub("\D", "", course_qusetion_number)
+        course_question_number = course_question.text
+        number_1 = re.sub("\D", "", course_question_number)
 
         course_question.click()
 

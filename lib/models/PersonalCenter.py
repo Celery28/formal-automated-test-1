@@ -27,7 +27,7 @@ class PersonalCenter(Page):
         点击进入就业课tab页
         :return:
         """
-        self.driver.find_element_by_css_selector("li.qd-job").click()
+        self.driver.find_element_by_css_selector("li.qd-job a").click()
 
     def get_random_select_job_course(self):
         """
