@@ -26,13 +26,13 @@ parser.add_argument('-ss', '--suites', default=[], nargs='*', help='设置运行
 opts = parser.parse_args()
 
 testcases.TestCase.set_environment(opts.environment)  # value of: development production pre-production
-default_test_suites = ['homepage', 'course', 'personalCenter', 'postCourse', 'search', 'series', 'teacher']
+all_test_suites = [_suite[:-9].lower() for _suite in testsuites.__dict__ if 'TestSuite' in _suite]
 
 if __name__ == '__main__':
 
     suite = unittest.TestSuite()
 
-    for suite_name in opts.suites or default_test_suites:
+    for suite_name in opts.suites or all_test_suites:
         suite_real_name = suite_name[0].upper() + suite_name[1:] + "TestSuite"
 
         if suite_real_name not in testsuites.__dict__:
