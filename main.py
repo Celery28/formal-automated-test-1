@@ -20,7 +20,7 @@ run_path = os.path.split(os.path.realpath(__file__))[0]
 
 parser = argparse.ArgumentParser()
 parser.add_argument('-e', '--environment', default='development', help='运行的测试环境，默认为：development。可选值：development pre-production production')
-parser.add_argument('-s', '--console', action="store_true", help='使用控制台输出')
+parser.add_argument('-r', '--report', action="store_true", help='生成HTML测试报告')
 parser.add_argument('-ss', '--suites', default=[], nargs='*', help='设置运行的测试套件，若不设置则执行所有套件')
 
 opts = parser.parse_args()
@@ -40,7 +40,7 @@ if __name__ == '__main__':
 
         suite.addTests(testsuites.__dict__[suite_real_name])
 
-    if opts.console is True:
+    if opts.report is False:
         runner = unittest.TextTestRunner()
     else:
         report_path = os.path.join(run_path, 'report')
