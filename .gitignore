@@ -101,3 +101,6 @@ ENV/
 
 */.DS_Store
 .git-credentials
+
+# vs code
+.vscode
