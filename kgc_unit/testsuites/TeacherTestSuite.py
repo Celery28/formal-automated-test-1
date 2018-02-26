@@ -1,4 +1,4 @@
-from unittest import TestSuite
+from kgc_unit.testsuites import TestSuite
 
 from kgc_unit import testcases
 
@@ -8,26 +8,28 @@ from kgc_unit import testcases
 :author chaoyang.li <chaoyang.li@kgc.cn>
 """
 
-TeacherTestSuite = TestSuite()
 
-# 教师列表页测试用例【正式、test、dev环境已通过】
+class TeacherTestSuite(TestSuite):
 
-# 验证随机筛选教师方向
-TeacherTestSuite.addTest(testcases.TeachersTestCase("test_teachers_category"))
+    def suites(self):
+        # 教师列表页测试用例【正式、test、dev环境已通过】
 
-# 随机进入教师详情页
-TeacherTestSuite.addTest(testcases.TeachersTestCase("test_teachers_page"))
+        # 验证随机筛选教师方向
+        self.addTest(testcases.TeachersTestCase("test_teachers_category"))
 
-# 教师详情页测试用例
+        # 随机进入教师详情页
+        self.addTest(testcases.TeachersTestCase("test_teachers_page"))
 
-# 验证教师详情页关注功能
-TeacherTestSuite.addTest(testcases.TeacherTestCase("test_teacher_details_favorite"))
+        # 教师详情页测试用例
 
-# 验证教师点赞功能
-TeacherTestSuite.addTest(testcases.TeacherTestCase("test_teacher_zan"))
+        # 验证教师详情页关注功能
+        self.addTest(testcases.TeacherTestCase("test_teacher_details_favorite"))
 
-# 验证随机进入同方向讲师
-TeacherTestSuite.addTest(testcases.TeacherTestCase("test_same_direction_teacher"))
+        # 验证教师点赞功能
+        self.addTest(testcases.TeacherTestCase("test_teacher_zan"))
 
-# 验证随机进入金牌讲师页面
-TeacherTestSuite.addTest(testcases.TeacherTestCase("test_gold_medal_teacher"))
+        # 验证随机进入同方向讲师
+        self.addTest(testcases.TeacherTestCase("test_same_direction_teacher"))
+
+        # 验证随机进入金牌讲师页面
+        self.addTest(testcases.TeacherTestCase("test_gold_medal_teacher"))

@@ -1,3 +1,4 @@
+from .TestSuite import TestSuite
 from .HomepageTestSuite import HomepageTestSuite
 from .CourseTestSuite import CourseTestSuite
 from .PersonalCenterTestSuite import PersonalCenterTestSuite

@@ -28,7 +28,6 @@ parser.add_argument('-e', '--environment', default='development',
                     help='运行的测试环境，默认为：development。可选值：development pre-production production')
 parser.add_argument('-r', '--report', action="store_true", help='生成HTML测试报告')
 parser.add_argument('-ss', '--suites', default=[], nargs='*', help='设置运行的测试套件，若不设置则执行所有套件')
-
 opts = parser.parse_args()
 
 testcases.TestCase.set_environment(opts.environment)  # value of: development production pre-production
@@ -42,7 +41,7 @@ if __name__ == '__main__':
         if suite_name.lower() not in all_test_suites.keys():
             raise NameError("无法找到对应的测试套件：{0}".format(suite_name))
 
-        suite.addTests(testsuites.__dict__[all_test_suites[suite_name.lower()]])
+        suite.addTests(testsuites.__dict__[all_test_suites[suite_name.lower()]]())
 
     if opts.report is False:
         runner = unittest.TextTestRunner()

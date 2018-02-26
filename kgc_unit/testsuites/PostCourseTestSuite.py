@@ -1,4 +1,4 @@
-from unittest import TestSuite
+from kgc_unit.testsuites import TestSuite
 
 from kgc_unit import testcases
 
@@ -8,12 +8,14 @@ from kgc_unit import testcases
 :author chaoyang.li <chaoyang.li@kgc.cn>
 """
 
-PostCourseTestSuite = TestSuite()
 
-# 【正式、test、dev环境已通过】
+class PostCourseTestSuite(TestSuite):
 
-# 验证进入岗位课详情页
-PostCourseTestSuite.addTest(testcases.PostCoursesTestCase("test_post_course"))
+    def suites(self):
+        # 【正式、test、dev环境已通过】
 
-# 测试岗位课中随机进入课程详情页
-PostCourseTestSuite.addTest(testcases.PostCourseTestCase("test_course_details_page"))
+        # 验证进入岗位课详情页
+        self.addTest(testcases.PostCoursesTestCase("test_post_course"))
+
+        # 测试岗位课中随机进入课程详情页
+        self.addTest(testcases.PostCourseTestCase("test_course_details_page"))
