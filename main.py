@@ -26,19 +26,17 @@ parser.add_argument('-ss', '--suites', default=[], nargs='*', help='设置运行
 opts = parser.parse_args()
 
 testcases.TestCase.set_environment(opts.environment)  # value of: development production pre-production
-all_test_suites = [_suite[:-9].lower() for _suite in testsuites.__dict__ if 'TestSuite' in _suite]
+all_test_suites = {_suite[:-9].lower(): _suite for _suite in testsuites.__dict__ if 'TestSuite' in _suite}
 
 if __name__ == '__main__':
 
     suite = unittest.TestSuite()
 
-    for suite_name in opts.suites or all_test_suites:
-        suite_real_name = suite_name[0].upper() + suite_name[1:] + "TestSuite"
+    for suite_name in opts.suites or all_test_suites.keys():
+        if suite_name.lower() not in all_test_suites.keys():
+            raise NameError("无法找到对应的测试套件：{0}".format(suite_name))
 
-        if suite_real_name not in testsuites.__dict__:
-            raise NameError("无法找到对应的测试套件：{0}".format(suite_real_name))
-
-        suite.addTests(testsuites.__dict__[suite_real_name])
+        suite.addTests(testsuites.__dict__[all_test_suites[suite_name.lower()]])
 
     if opts.report is False:
         runner = unittest.TextTestRunner()
