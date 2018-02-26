@@ -18,8 +18,14 @@ from common.unittest_.runner import HTMLTestRunner
 
 run_path = os.path.split(os.path.realpath(__file__))[0]
 
+"""
+举例说明：
+python3 main.py -e production -r   正式环境，生成测试报告，所有套件
+python3 main.py -ss Course     dev环境，不生成测试报告，CourseTestSuite套件
+"""
 parser = argparse.ArgumentParser()
-parser.add_argument('-e', '--environment', default='development', help='运行的测试环境，默认为：development。可选值：development pre-production production')
+parser.add_argument('-e', '--environment', default='development',
+                    help='运行的测试环境，默认为：development。可选值：development pre-production production')
 parser.add_argument('-r', '--report', action="store_true", help='生成HTML测试报告')
 parser.add_argument('-ss', '--suites', default=[], nargs='*', help='设置运行的测试套件，若不设置则执行所有套件')
 
