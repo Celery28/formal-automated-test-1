@@ -25,3 +25,10 @@
 ```python3 main.py -e development```
 ```python3 main.py -e pre-production```
 ```python3 main.py -e production```
+
+# 允许通过命令行参数指定运行的测试套件
+```python3 main.py -ss homepage course```
+
+# 请通过help参数查看所有可用的命令行参数
+```python3 main.py -h```
+```python3 main.py --help```
