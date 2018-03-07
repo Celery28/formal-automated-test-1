@@ -2,56 +2,44 @@
 # _._ coding:utf-8 _._
 
 """
-运行测试用例，形成测试报告
+课工场自动化测试主入口文件
 
+测试以模块为单位对具体业务进行测试，通过建立模块并注册在映射表中可以添加新的模块
+每个模块应该时一个包，在该包的__init__.py文件中实现该模块的主入口函数，并将该函数添加到映射表中
+已安装的模块如下：
+    function   自动化功能测试模块
+    api        自动化APP接口测试模块
+
+使用方法:
+    自动化功能测试
+        python3 main.py functions -e production -r   正式环境，生成测试报告，所有套件
+        python3 main.py functions -ss Course     dev环境，不生成测试报告，CourseTestSuite套件
+
+:python version: ~3.6.0
+:requests version: ~2.18.0
 :author: ronghui.huo <ronghui.huo@kgc.cn>
 """
 
 import os
-import time
-import unittest
 import argparse
 
-from kgc_unit import testcases
-from kgc_unit import testsuites
-from common.unittest_.runner import HTMLTestRunner
+import test_module_function
+import test_module_api
 
 run_path = os.path.split(os.path.realpath(__file__))[0]
 
-"""
-举例说明：
-python3 main.py -e production -r   正式环境，生成测试报告，所有套件
-python3 main.py -ss Course     dev环境，不生成测试报告，CourseTestSuite套件
-"""
 parser = argparse.ArgumentParser()
+parser.add_argument('module', default='function', help='执行的测试模块，默认为：function。可选值：function api')
 parser.add_argument('-e', '--environment', default='development',
                     help='运行的测试环境，默认为：development。可选值：development pre-production production')
 parser.add_argument('-r', '--report', action="store_true", help='生成HTML测试报告')
 parser.add_argument('-ss', '--suites', default=[], nargs='*', help='设置运行的测试套件，若不设置则执行所有套件')
 opts = parser.parse_args()
 
-testcases.TestCase.set_environment(opts.environment)  # value of: development production pre-production
-all_test_suites = {_suite[:-9].lower(): _suite for _suite in testsuites.__dict__ if 'TestSuite' in _suite}
-
 if __name__ == '__main__':
+    modules = {'function': test_module_function.main, 'api': test_module_api.main}
 
-    suite = unittest.TestSuite()
+    if opts.module not in modules:
+        raise ValueError('无效的模块参数:{0}'.format(opts.module))
 
-    for suite_name in opts.suites or all_test_suites.keys():
-        if suite_name.lower() not in all_test_suites.keys():
-            raise NameError("无法找到对应的测试套件：{0}".format(suite_name))
-
-        suite.addTests(testsuites.__dict__[all_test_suites[suite_name.lower()]]())
-
-    if opts.report is False:
-        runner = unittest.TextTestRunner()
-    else:
-        report_path = os.path.join(run_path, 'report')
-        now = time.strftime('%Y-%m-%d %H-%M-%S')
-
-        filename = os.path.join(report_path, now + 'report.html')
-        fp = open(filename, 'wb')
-
-        runner = HTMLTestRunner(stream=fp, title='课程库测试结果', description='测试报告.')
-
-    runner.run(suite)
+    modules[opts.module](opts)
