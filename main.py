@@ -26,8 +26,6 @@ import argparse
 import test_module_function
 import test_module_api
 
-run_path = os.path.split(os.path.realpath(__file__))[0]
-
 parser = argparse.ArgumentParser()
 parser.add_argument('module', help='执行的测试模块。可选值：function api')
 parser.add_argument('-e', '--environment', default='development',
