@@ -12,8 +12,8 @@
 
 使用方法:
     自动化功能测试
-        python3 main.py functions -e production -r   正式环境，生成测试报告，所有套件
-        python3 main.py functions -ss Course     dev环境，不生成测试报告，CourseTestSuite套件
+        python3 main.py function -e production -r   正式环境，生成测试报告，所有套件
+        python3 main.py function -ss Course     dev环境，不生成测试报告，CourseTestSuite套件
 
 :python version: ~3.6.0
 :requests version: ~2.18.0
@@ -29,7 +29,7 @@ import test_module_api
 run_path = os.path.split(os.path.realpath(__file__))[0]
 
 parser = argparse.ArgumentParser()
-parser.add_argument('module', default='function', help='执行的测试模块，默认为：function。可选值：function api')
+parser.add_argument('module', help='执行的测试模块。可选值：function api')
 parser.add_argument('-e', '--environment', default='development',
                     help='运行的测试环境，默认为：development。可选值：development pre-production production')
 parser.add_argument('-r', '--report', action="store_true", help='生成HTML测试报告')
