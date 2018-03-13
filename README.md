@@ -19,15 +19,22 @@
 *Tip:1121为启动Xvfb进程时指定的编号*
 
 ## 4.执行测试
-```python3 main.py```
+
+执行时分为功能测试与接口测试
+
+### 4.1 执行功能测试
+```python3 main.py function```
+
+### 4.2 执行接口测试
+```python3 main.py api```
 
 # 允许通过命令行参数指定运行的测试环境
-```python3 main.py -e development```
-```python3 main.py -e pre-production```
-```python3 main.py -e production```
+```python3 main.py function -e development```
+```python3 main.py function -e pre-production```
+```python3 main.py function -e production```
 
 # 允许通过命令行参数指定运行的测试套件
-```python3 main.py -ss homepage course```
+```python3 main.py function -ss homepage course```
 
 # 请通过help参数查看所有可用的命令行参数
 ```python3 main.py -h```
