@@ -4,7 +4,7 @@ import abc
 """
 基础测试套件
 
-:author chaoyang.li <chaoyang.li@kgc.cn>
+:author: ronghui.huo <ronghui.huo@kgc.cn>
 """
 
 

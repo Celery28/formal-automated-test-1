@@ -1,4 +1,7 @@
-#
+"""
+测试使用
+:author: ronghui.huo <ronghui.huo@kgc.cn>
+"""
 # def sum_cycle(n):
 #
 #     sum = 0

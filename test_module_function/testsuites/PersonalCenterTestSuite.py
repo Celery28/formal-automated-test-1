@@ -5,7 +5,7 @@ from test_module_function import testcases
 """
 个人中心测试套件
 
-:author chaoyang.li <chaoyang.li@kgc.cn>
+:author: ronghui.huo <ronghui.huo@kgc.cn>
 """
 
 
