@@ -1,5 +1,5 @@
 # formal-automated-test
-课工场正式环境自动化测试
+自动化测试
 
 *如果你有协作者账号请使用协作者账号提交；此仓库不接受Pull Request*
 
